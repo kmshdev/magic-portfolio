@@ -32,11 +32,7 @@ export function validateUrlForSSRF(urlString: string): SSRFValidationResult {
     }
 
     // Block localhost and internal hostnames
-    if (
-      hostname === "localhost" ||
-      hostname.endsWith(".local") ||
-      hostname.endsWith(".internal")
-    ) {
+    if (hostname === "localhost" || hostname.endsWith(".local") || hostname.endsWith(".internal")) {
       return { valid: false, error: "Disallowed URL" };
     }
 

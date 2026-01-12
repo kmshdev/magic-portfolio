@@ -1,0 +1,16 @@
+# Lefthook Configuration
+# https://github.com/evilmartians/lefthook
+# Skip hooks with: LEFTHOOK=0 git commit
+
+pre-commit:
+  parallel: true
+  commands:
+    lint-staged:
+      glob: "*.{js,ts,jsx,tsx,json,md,mdx,mjs}"
+      run: npx lint-staged
+      stage_fixed: true
+
+pre-push:
+  commands:
+    type-check:
+      run: npm run type-check

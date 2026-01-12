@@ -1,10 +1,10 @@
-import { Person, Social, Home, About, Blog, Work, Newsletter, Gallery } from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
+import type { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
 
 const person: Person = {
   firstName: "Keshav",
   lastName: "Mishra",
-  name: `Keshav Mishra`,
+  name: "Keshav Mishra",
   role: "LLM and ML Engineer",
   avatar: "/images/avatar.jpg",
   email: "me@kmsh.dev",
@@ -73,8 +73,8 @@ const home: Home = {
       <Text as="span" size="xl" weight="strong">
         open-source AI tooling
       </Text>
-      . <br />I architect production-grade LLM applications that transform complex
-      workflows into intelligent automation.
+      . <br />I architect production-grade LLM applications that transform complex workflows into
+      intelligent automation.
     </>
   ),
 };
@@ -100,11 +100,11 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Innovative LLM and ML Engineer with 5+ years of experience across retail,
-        finance, oil & gas, and health/insurance NLP. Specialized in building
-        autonomous agents, large language model applications, and open-source AI
-        tooling. Seeking full-time roles focused on generative AI, LLM product
-        engineering, and next-generation NLP systems in dynamic, impact-driven teams.
+        Innovative LLM and ML Engineer with 5+ years of experience across retail, finance, oil &
+        gas, and health/insurance NLP. Specialized in building autonomous agents, large language
+        model applications, and open-source AI tooling. Seeking full-time roles focused on
+        generative AI, LLM product engineering, and next-generation NLP systems in dynamic,
+        impact-driven teams.
       </>
     ),
   },
@@ -118,36 +118,33 @@ const about: About = {
         role: "Lead LLM Engineer, Autonomous Agent Platforms",
         achievements: [
           <>
-            Conceived, architected, and implemented <strong>Genie</strong>, Valory's
-            flagship LLM-driven code generation and agent scaffolding platform—an
-            industry-first system enabling autonomous agent and service creation from
-            natural language.
+            Conceived, architected, and implemented <strong>Genie</strong>, Valory's flagship
+            LLM-driven code generation and agent scaffolding platform—an industry-first system
+            enabling autonomous agent and service creation from natural language.
           </>,
           <>
-            Directly reduced agent/service prototyping time from weeks to minutes,
-            democratizing autonomous agent development for both technical and
-            non-technical users.
+            Directly reduced agent/service prototyping time from weeks to minutes, democratizing
+            autonomous agent development for both technical and non-technical users.
           </>,
           <>
-            Architected and developed <strong>agents-fun-eliza</strong>, an autonomous
-            agent for the Agents.fun ecosystem, leveraging the Eliza framework to
-            deliver fully open-sourced, interactive, and extensible conversational
-            agents.
+            Architected and developed <strong>agents-fun-eliza</strong>, an autonomous agent for the
+            Agents.fun ecosystem, leveraging the Eliza framework to deliver fully open-sourced,
+            interactive, and extensible conversational agents.
           </>,
           <>
-            Published and maintained <strong>plugin-memeooorr</strong>—a
-            TypeScript-based open-source package, released on npm, enabling meme-centric
-            agent extensions and community creativity.
+            Published and maintained <strong>plugin-memeooorr</strong>—a TypeScript-based
+            open-source package, released on npm, enabling meme-centric agent extensions and
+            community creativity.
           </>,
           <>
-            Engineered robust LLM prompt engineering pipelines, enabling
-            semantic-to-formal translation for agent behaviors and FSMs, with feedback
-            loops and error handling for high-reliability code generation.
+            Engineered robust LLM prompt engineering pipelines, enabling semantic-to-formal
+            translation for agent behaviors and FSMs, with feedback loops and error handling for
+            high-reliability code generation.
           </>,
           <>
             Enhanced agent orchestration and deployment pipelines using containerization
-            (Docker/Kubernetes), CI/CD, MLflow, and best MLOps practices—delivering
-            reproducible, secure, and scalable agent workflows.
+            (Docker/Kubernetes), CI/CD, MLflow, and best MLOps practices—delivering reproducible,
+            secure, and scalable agent workflows.
           </>,
         ],
         images: [],
@@ -158,42 +155,38 @@ const about: About = {
         role: "LLM and MLOps Engineer",
         achievements: [
           <>
-            Developed a <strong>RAG Agent</strong> for on-field agents to access and
-            retrieve maintenance logs, servicing records, and critical equipment data
-            on-demand.
+            Developed a <strong>RAG Agent</strong> for on-field agents to access and retrieve
+            maintenance logs, servicing records, and critical equipment data on-demand.
           </>,
           <>
-            Developed a <strong>Text2SQL2Plot LLM agent</strong> for field workers in
-            turbomachinery plants using Vanna.ai and GPT-4o-mini, reducing repair time
-            by 20%.
+            Developed a <strong>Text2SQL2Plot LLM agent</strong> for field workers in turbomachinery
+            plants using Vanna.ai and GPT-4o-mini, reducing repair time by 20%.
           </>,
           <>
-            Fabricated end-to-end <strong>AutoML</strong> that auto tracks, hypertunes,
-            deploys models saving 100+ hrs monthly work.
+            Fabricated end-to-end <strong>AutoML</strong> that auto tracks, hypertunes, deploys
+            models saving 100+ hrs monthly work.
           </>,
           <>
-            Built a <strong>LLM Role Assistant</strong> tool based on internal alerts
-            data with LangChain & GPT-4 saving 200+ man hours monthly, which performs
-            work equal to 4 team members of alert management team.
+            Built a <strong>LLM Role Assistant</strong> tool based on internal alerts data with
+            LangChain & GPT-4 saving 200+ man hours monthly, which performs work equal to 4 team
+            members of alert management team.
           </>,
           <>
-            Pioneered a <strong>RAG based LLM chatbot</strong> using GPT-4 and
-            LlamaIndex, that allows user to interact with bot that has access to latest
-            developments in Energy, Oil and Gas fields, that is directly client facing
-            for big Oil and Gas Clients.
+            Pioneered a <strong>RAG based LLM chatbot</strong> using GPT-4 and LlamaIndex, that
+            allows user to interact with bot that has access to latest developments in Energy, Oil
+            and Gas fields, that is directly client facing for big Oil and Gas Clients.
           </>,
           <>
-            Built an in-house <strong>MLOps platform</strong> utilizing drift detection,
-            MLflow, automated model training, that reduced modeling related workload by
-            70%.
+            Built an in-house <strong>MLOps platform</strong> utilizing drift detection, MLflow,
+            automated model training, that reduced modeling related workload by 70%.
           </>,
           <>
-            Trained <strong>Mistral 7B model</strong> using on-premise data of alerts
-            utilizing a distributed framework that can scale to large datasets.
+            Trained <strong>Mistral 7B model</strong> using on-premise data of alerts utilizing a
+            distributed framework that can scale to large datasets.
           </>,
           <>
-            Led a team of data scientists in developing a ML model that predicted the
-            failure of turbomachinery with <strong>96.5% accuracy</strong>.
+            Led a team of data scientists in developing a ML model that predicted the failure of
+            turbomachinery with <strong>96.5% accuracy</strong>.
           </>,
         ],
         images: [],
@@ -208,8 +201,8 @@ const about: About = {
         name: "GGSIPU",
         description: (
           <>
-            B.E. Computer Science (2016 - 2020) • GPA: 8.1 • Winner at Smart India
-            Hackathon 2018, AICTE
+            B.E. Computer Science (2016 - 2020) • GPA: 8.1 • Winner at Smart India Hackathon 2018,
+            AICTE
           </>
         ),
       },
@@ -223,8 +216,8 @@ const about: About = {
         title: "LLM Engineering",
         description: (
           <>
-            Expert in prompt engineering, RAG (Retrieval-Augmented Generation), agent
-            orchestration, and semantic-to-formal translation for autonomous systems.
+            Expert in prompt engineering, RAG (Retrieval-Augmented Generation), agent orchestration,
+            and semantic-to-formal translation for autonomous systems.
           </>
         ),
         tags: [
@@ -240,8 +233,8 @@ const about: About = {
         title: "MLOps & Infrastructure",
         description: (
           <>
-            Building production-grade ML systems with CI/CD, drift detection, AutoML,
-            and containerized deployment at scale.
+            Building production-grade ML systems with CI/CD, drift detection, AutoML, and
+            containerized deployment at scale.
           </>
         ),
         tags: [
@@ -256,8 +249,8 @@ const about: About = {
         title: "Programming & Cloud",
         description: (
           <>
-            Full-stack AI development in Python, TypeScript, and Rust, with expertise in
-            AWS, SQL, MongoDB, and Redis.
+            Full-stack AI development in Python, TypeScript, and Rust, with expertise in AWS, SQL,
+            MongoDB, and Redis.
           </>
         ),
         tags: [
@@ -273,8 +266,8 @@ const about: About = {
         title: "Data Science & ML",
         description: (
           <>
-            Advanced expertise in NLP, time series analysis, statistics, and machine
-            learning frameworks like XGBoost and scikit-learn.
+            Advanced expertise in NLP, time series analysis, statistics, and machine learning
+            frameworks like XGBoost and scikit-learn.
           </>
         ),
         tags: [

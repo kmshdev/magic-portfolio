@@ -13,6 +13,7 @@ Next.js 16 App Router + MDX content. Production site at keshav-mishra.dev.
 | `src/app/work/projects/*.mdx` | Project case studies |
 | `src/app/blog/posts/*.mdx` | Blog posts |
 | `src/components/Providers.tsx` | ThemeProvider setup |
+| `src/components/ThemeToggle.tsx` | Theme switcher component |
 
 ## Once UI Rules
 
@@ -36,9 +37,21 @@ Next.js 16 App Router + MDX content. Production site at keshav-mishra.dev.
 ```bash
 npm run dev          # Dev server :3000
 npm run build        # Production build (must pass before PR)
-npm run biome-write  # Format code
-npm run lint         # Lint check
+npm run format       # Format code with Biome
+npm run lint         # Lint check with Biome
+npm run type-check   # TypeScript type checking
+npm run check:all    # Type-check + lint + format
 ```
+
+**Tooling**: Biome (formatter + linter), Lefthook (git hooks), lint-staged (pre-commit)
+- Pre-commit: Auto-formats staged files via Biome
+- Pre-push: Runs type-check before push
+- CI: GitHub Actions validates build + lint + format + types on PRs
+
+**Biome config** (`biome.json`):
+- Line width: 100, 2-space indent, double quotes
+- Rules: `noExplicitAny` (warn), `noDoubleEquals` (error), accessibility warnings
+- Formats: JS/TS/JSX/TSX, JSON, MDX, Markdown
 
 ## Deployment
 
@@ -56,6 +69,8 @@ Vercel (standard Next.js, no custom config). Auto-deploys from main.
 - [ ] TypeScript strict - no `any` types
 - [ ] MDX frontmatter complete (title, publishedAt, summary, images, team)
 - [ ] `npm run build` passes
+- [ ] Pre-commit hooks pass (format + lint via Biome)
+- [ ] Type-check passes (`npm run type-check`)
 - [ ] Keyboard navigation works
 
 ## Gotchas
