@@ -1,0 +1,53 @@
+---
+title: "agents-fun-eliza: Autonomous Conversational Agent"
+publishedAt: "2024-11-20"
+summary: "An autonomous agent built on the Eliza framework for the Agents.fun ecosystem, featuring advanced conversational AI and agent orchestration capabilities."
+images:
+  - "/images/projects/agents-fun-eliza/cover.jpg"
+team:
+  - name: "Keshav Mishra"
+    role: "LLM Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/keshav98"
+---
+
+## Overview
+
+agents-fun-eliza is an autonomous conversational agent built on the Eliza framework for the Agents.fun ecosystem. It combines natural language understanding, memory systems, and agent orchestration to create engaging, context-aware interactions that go beyond simple chatbots.
+
+## Key Features
+
+- **Autonomous Behavior**: Proactive conversation initiation based on context and user patterns, not just reactive responses.
+- **Memory Systems**: Persistent memory across conversations with semantic search for relevant context retrieval.
+- **Multi-Modal Interactions**: Supports text, images, and structured data in conversations.
+- **Agent Orchestration**: Coordinates multiple sub-agents for specialized tasks (research, analysis, creative generation).
+- **Eliza Framework Integration**: Leverages the battle-tested Eliza framework for robust conversation management.
+
+## Technologies Used
+
+- **TypeScript**: Primary implementation language for type-safe agent logic
+- **Eliza Framework**: Conversational AI foundation
+- **LangChain.js**: LLM orchestration and tool integration
+- **Vector Database**: Semantic memory and context retrieval
+- **Agents.fun Platform**: Deployment and hosting infrastructure
+
+## Architecture
+
+The agent follows a modular architecture with distinct layers:
+1. **Perception Layer**: Processes incoming messages and extracts intent
+2. **Memory Layer**: Retrieves relevant context from conversation history
+3. **Reasoning Layer**: Determines appropriate response strategy
+4. **Action Layer**: Generates responses or delegates to specialized sub-agents
+5. **Learning Layer**: Updates memory and improves future interactions
+
+## Challenges and Learnings
+
+Building truly autonomous agents requires balancing proactivity with appropriateness—knowing when to initiate conversation versus when to wait. This required developing sophisticated context-awareness systems and user preference modeling. Additionally, managing memory at scale while maintaining conversation coherence presented interesting technical challenges around semantic search and context window optimization.
+
+## Outcome
+
+The agent has been deployed in the Agents.fun ecosystem and demonstrates advanced conversational capabilities that feel natural and engaging. It serves as a reference implementation for building autonomous agents on the Eliza framework.
+
+**Links**:
+- [GitHub Repository](https://github.com/valory-xyz/agents-fun-eliza)
+- [Live Demo](https://agents.fun)
