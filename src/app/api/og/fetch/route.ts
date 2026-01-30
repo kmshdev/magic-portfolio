@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { validateUrlForSSRF } from "../utils";
 
 export const runtime = "edge";
 
@@ -63,7 +64,7 @@ async function extractMetadata(html: string) {
   return {
     title: decodeHTMLEntities(title),
     description: decodeHTMLEntities(description),
-    image: image,
+    image: decodeHTMLEntities(image),
   };
 }
 
@@ -76,32 +77,9 @@ export async function GET(request: Request) {
   }
 
   // Validate URL to prevent SSRF attacks
-  try {
-    const parsedUrl = new URL(url);
-    
-    // Only allow HTTP/HTTPS protocols
-    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
-      return NextResponse.json({ error: "Invalid URL protocol" }, { status: 400 });
-    }
-    
-    // Block private IP ranges, localhost, and internal hostnames
-    const hostname = parsedUrl.hostname.toLowerCase();
-    if (
-      hostname === 'localhost' ||
-      hostname.startsWith('127.') ||
-      hostname.startsWith('10.') ||
-      hostname.startsWith('192.168.') ||
-      hostname.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./) ||
-      hostname === '::1' ||
-      hostname === '0.0.0.0' ||
-      hostname === '169.254.169.254' ||
-      hostname.endsWith('.internal') ||
-      hostname.endsWith('.local')
-    ) {
-      return NextResponse.json({ error: "Disallowed URL" }, { status: 400 });
-    }
-  } catch (e) {
-    return NextResponse.json({ error: "Invalid URL format" }, { status: 400 });
+  const validation = validateUrlForSSRF(url);
+  if (!validation.valid) {
+    return NextResponse.json({ error: validation.error }, { status: 400 });
   }
 
   try {

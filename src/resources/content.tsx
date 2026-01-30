@@ -128,7 +128,7 @@ const about: About = {
       {
         company: "Mechatomy Engineering Solutions / Vimele / Zurich",
         timeframe: "2020 - 2024",
-        role: "LLM and MLOPS Engineer",
+        role: "LLM and MLOps Engineer",
         achievements: [
           <>
             Delivered <strong>Text2SQL2Plot LLM Agent</strong> for turbomachinery analytics,
