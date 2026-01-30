@@ -21,6 +21,9 @@ function decodeHTMLEntities(text: string): string {
       const code = entity.startsWith("#x")
         ? parseInt(entity.slice(2), 16)
         : parseInt(entity.slice(1), 10);
+      if (isNaN(code)) {
+        return match;
+      }
       return String.fromCharCode(code);
     }
 
