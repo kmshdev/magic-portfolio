@@ -1,13 +1,13 @@
 {
-  "name": "selene-yu-portfolio",
+  "name": "kmsh-portfolio",
   "version": "2.3.0",
-  "description": "Professional portfolio for Selene Yu - Design Engineer",
-  "author": "Selene Yu",
+  "description": "Professional portfolio for Keshav Mishra (kmsh) - LLM and ML Engineer",
+  "author": "Keshav Mishra <me@kmsh.dev>",
   "repository": {
     "type": "git",
     "url": "https://github.com/keshav1998/magic-portfolio.git"
   },
-  "homepage": "https://github.com/keshav1998/magic-portfolio#readme",
+  "homepage": "https://kmsh.dev",
   "bugs": {
     "url": "https://github.com/keshav1998/magic-portfolio/issues"
   },

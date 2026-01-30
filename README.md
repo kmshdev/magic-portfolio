@@ -1,19 +1,19 @@
-# Selene Yu - Portfolio
+# Keshav Mishra (kmsh) - Portfolio
 
-A modern, performant portfolio website built with Next.js 16, React 19, and TypeScript. Showcasing design engineering work, projects, and technical writing through a clean, accessible interface powered by the Once UI design system.
+A modern, performant portfolio website built with Next.js 16, React 19, and TypeScript. Showcasing LLM engineering work, autonomous agent platforms, and technical projects through a clean, accessible interface powered by the Once UI design system.
 
 ![Portfolio Preview](public/images/og/home.jpg)
 
 ## About
 
-This portfolio serves as a professional showcase for **Selene Yu**, a Design Engineer specializing in creating beautiful, functional user experiences. The site features:
+This portfolio serves as a professional showcase for **Keshav Mishra** (kmsh), an LLM and ML Engineer specializing in autonomous agent platforms, large language models, and MLOps. The site features:
 
 - **Work Portfolio** - Featured projects and case studies
-- **Technical Blog** - Articles on design engineering and development
+- **Technical Blog** - Articles on LLM engineering, autonomous agents, and MLOps
 - **About/CV** - Professional background and experience
 - **Gallery** - Visual design work and explorations
 
-**Live Site:** [Your deployment URL]
+**Live Site:** [kmsh.dev](https://kmsh.dev)
 
 ## Tech Stack
 
