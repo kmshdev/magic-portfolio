@@ -26,7 +26,7 @@
     "transliteration": "^2.6.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.3.13",
     "@types/cookie": "^0.6.0",
     "@types/node": "^20.17.30",
     "@types/react": "^19.2.10",
