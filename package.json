@@ -1,6 +1,16 @@
 {
-  "name": "@once-ui-system/magic-portfolio",
+  "name": "selene-yu-portfolio",
   "version": "2.3.0",
+  "description": "Professional portfolio for Selene Yu - Design Engineer",
+  "author": "Selene Yu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshav1998/magic-portfolio.git"
+  },
+  "homepage": "https://github.com/keshav1998/magic-portfolio#readme",
+  "bugs": {
+    "url": "https://github.com/keshav1998/magic-portfolio/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "export": "next export",
