@@ -1,0 +1,120 @@
+# Pre-commit configuration for prek (Rust-based pre-commit alternative)
+# Install prek: npm add -D @j178/prek OR brew install prek
+# Run: prek install && prek run --all-files
+
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
+
+repos:
+  # Biome - Fast Rust-based linter and formatter (already in project)
+  - repo: local
+    hooks:
+      - id: biome-check
+        name: Biome Check (lint + format)
+        entry: npx @biomejs/biome check --write --unsafe
+        language: system
+        types_or: [javascript, jsx, ts, tsx, json]
+        pass_filenames: true
+        stages: [pre-commit]
+
+  # TypeScript type checking
+  - repo: local
+    hooks:
+      - id: typescript
+        name: TypeScript Type Check
+        entry: npx tsc --noEmit
+        language: system
+        types: [ts, tsx]
+        pass_filenames: false
+        stages: [pre-commit]
+
+  # Typos - Fast spell checker written in Rust
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.42.1
+    hooks:
+      - id: typos
+        name: Check for typos
+        args: [--force-exclude]
+        exclude: |
+          (?x)^(
+            pnpm-lock\.yaml|
+            package-lock\.json|
+            \.next/.*|
+            node_modules/.*
+          )$
+
+  # Markdown lint
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.17.2
+    hooks:
+      - id: markdownlint-cli2
+        name: Lint Markdown files
+        args: [--fix]
+        types: [markdown]
+        exclude: |
+          (?x)^(
+            node_modules/.*|
+            \.next/.*|
+            CHANGELOG\.md
+          )$
+
+  # Security checks for secrets
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        name: Detect secrets
+        args: [--baseline, .secrets.baseline]
+        exclude: |
+          (?x)^(
+            pnpm-lock\.yaml|
+            package-lock\.json
+          )$
+
+  # Conventional commits enforcement
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        name: Conventional Commits
+        stages: [commit-msg]
+        args: [feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert, security]
+
+  # YAML validation
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        name: Lint YAML files
+        args: [-c, .yamllint.yaml]
+        types: [yaml]
+
+  # Check for large files
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        name: Check for large files
+        args: [--maxkb=500]
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+      - id: end-of-file-fixer
+        name: Fix end of file
+        exclude: |
+          (?x)^(
+            \.next/.*|
+            node_modules/.*
+          )$
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        exclude: |
+          (?x)^(
+            \.next/.*|
+            node_modules/.*|
+            .*\.mdx$
+          )$
+      - id: check-json
+        name: Validate JSON
+        exclude: tsconfig\.json
+      - id: check-yaml
+        name: Validate YAML

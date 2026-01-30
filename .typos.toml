@@ -1,0 +1,25 @@
+# typos configuration
+# https://github.com/crate-ci/typos
+
+[files]
+extend-exclude = [
+  "pnpm-lock.yaml",
+  "package-lock.json",
+  ".next/",
+  "node_modules/",
+  "*.min.js",
+  "*.min.css",
+]
+
+[default]
+# Locale to use for spell checking
+locale = "en-us"
+
+[default.extend-words]
+# Add project-specific words that should not be flagged
+kmsh = "kmsh"
+MLOps = "MLOps"
+MLOPS = "MLOPS"
+
+[default.extend-identifiers]
+# Add identifiers that should not be flagged
