@@ -14,24 +14,24 @@
     "@next/mdx": "^16.1.6",
     "@once-ui-system/core": "^1.5.14",
     "classnames": "^2.5.1",
-    "cookie": "^1.0.2",
+    "cookie": "^1.1.1",
     "gray-matter": "^4.0.3",
-    "lint-staged": "^16.1.5",
+    "lint-staged": "^16.2.7",
     "next": "^16.1.6",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-icons": "^5.5.0",
-    "sass": "^1.86.3",
-    "transliteration": "^2.3.5"
+    "sass": "^1.97.3",
+    "transliteration": "^2.6.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/cookie": "^0.6.0",
     "@types/node": "^20.17.30",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.5",
-    "eslint": "^9.25.0",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.2",
     "typescript": "^5.9.3",
     "tzdata": "^1.0.47"
   }
