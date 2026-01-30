@@ -10,6 +10,7 @@ import {
   Schema,
   Meta,
   Line,
+  MatrixFx,
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
@@ -42,8 +43,22 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column fillWidth horizontal="center" gap="m">
-        <Column maxWidth="s" horizontal="center" align="center">
+      <Column fillWidth horizontal="center" gap="m" style={{ position: "relative" }}>
+        {/* MatrixFx background effect */}
+        <MatrixFx
+          height={24}
+          colors={["brand-solid-medium"]}
+          trigger="mount"
+          flicker
+          position="absolute"
+          top="0"
+          left="0"
+          right="0"
+          zIndex={0}
+          pointerEvents="none"
+          style={{ opacity: 0.3 }}
+        />
+        <Column maxWidth="s" horizontal="center" align="center" style={{ position: "relative", zIndex: 1 }}>
           {home.featured.display && (
             <RevealFx
               fillWidth
