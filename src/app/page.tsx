@@ -10,6 +10,7 @@ import {
   RevealFx,
   Row,
   Schema,
+  ShineFx,
   Text,
   TypeFx,
 } from "@once-ui-system/core";
@@ -103,7 +104,9 @@ export default function Home() {
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
             <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              {home.subline}
+              <ShineFx speed={4} baseOpacity={0.7}>
+                {home.subline}
+              </ShineFx>
             </Text>
           </RevealFx>
           <RevealFx paddingTop="12" delay={0.4} horizontal="center" paddingLeft="12">
