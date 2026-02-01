@@ -52,13 +52,15 @@ export default function Home() {
           colors={["brand-solid-medium"]}
           trigger="mount"
           flicker
-          position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          zIndex={0}
-          pointerEvents="none"
-          style={{ opacity: 0.3 }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+            opacity: 0.3,
+          }}
         />
         <Column
           maxWidth="s"
