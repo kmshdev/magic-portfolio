@@ -1,20 +1,23 @@
 import {
-  Heading,
-  Text,
-  Button,
   Avatar,
-  RevealFx,
-  Column,
   Badge,
+  Button,
+  Column,
+  Heading,
+  Line,
+  MatrixFx,
+  Meta,
+  RevealFx,
   Row,
   Schema,
-  Meta,
-  Line,
+  ShineFx,
+  Text,
+  TypeFx,
 } from "@once-ui-system/core";
-import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
-import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
+import { Projects } from "@/components/work/Projects";
+import { about, baseURL, home, person, routes } from "@/resources";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -42,8 +45,29 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column fillWidth horizontal="center" gap="m">
-        <Column maxWidth="s" horizontal="center" align="center">
+      <Column fillWidth horizontal="center" gap="m" style={{ position: "relative" }}>
+        {/* MatrixFx background effect */}
+        <MatrixFx
+          height={24}
+          colors={["brand-solid-medium"]}
+          trigger="mount"
+          flicker
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+            opacity: 0.3,
+          }}
+        />
+        <Column
+          maxWidth="s"
+          horizontal="center"
+          align="center"
+          style={{ position: "relative", zIndex: 1 }}
+        >
           {home.featured.display && (
             <RevealFx
               fillWidth
@@ -66,13 +90,30 @@ export default function Home() {
             </RevealFx>
           )}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading wrap="balance" variant="display-strong-l">
-              {home.headline}
+            <Heading
+              wrap="balance"
+              variant="display-strong-l"
+              aria-label="Building bridges between design and code"
+            >
+              <TypeFx
+                words={[
+                  "Building bridges between design and code",
+                  "Crafting intuitive user experiences",
+                  "Creating beautiful digital products",
+                ]}
+                speed={80}
+                hold={2500}
+                delay={300}
+                trigger="instant"
+                aria-hidden="true"
+              />
             </Heading>
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
             <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              {home.subline}
+              <ShineFx speed={4} baseOpacity={0.7}>
+                {home.subline}
+              </ShineFx>
             </Text>
           </RevealFx>
           <RevealFx paddingTop="12" delay={0.4} horizontal="center" paddingLeft="12">
