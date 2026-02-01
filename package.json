@@ -1,6 +1,16 @@
 {
-  "name": "@once-ui-system/magic-portfolio",
+  "name": "kmsh-portfolio",
   "version": "2.3.0",
+  "description": "Professional portfolio for Keshav Mishra (kmsh) - LLM and ML Engineer",
+  "author": "Keshav Mishra <me@kmsh.dev>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshav1998/magic-portfolio.git"
+  },
+  "homepage": "https://kmsh.dev",
+  "bugs": {
+    "url": "https://github.com/keshav1998/magic-portfolio/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "export": "next export",
@@ -10,29 +20,28 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mdx-js/loader": "^3.1.0",
-    "@next/mdx": "^16.0.10",
-    "@once-ui-system/core": "^1.5.6",
+    "@mdx-js/loader": "^3.1.1",
+    "@next/mdx": "^16.1.6",
+    "@once-ui-system/core": "^1.5.14",
     "classnames": "^2.5.1",
-    "cookie": "^1.0.2",
+    "cookie": "^1.1.1",
     "gray-matter": "^4.0.3",
-    "lint-staged": "^16.1.5",
-    "next": "^16.0.10",
+    "next": "^16.1.6",
     "next-mdx-remote": "^5.0.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-icons": "^5.5.0",
-    "sass": "^1.86.3",
-    "transliteration": "^2.3.5"
+    "sass": "^1.97.3",
+    "transliteration": "^2.6.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@types/cookie": "^0.6.0",
-    "@types/node": "^20.17.30",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.5",
-    "eslint": "^9.25.0",
-    "typescript": "^5.8.3",
-    "tzdata": "^1.0.44"
+    "@biomejs/biome": "^2.3.13",
+    "@types/node": "^22.10.6",
+    "lint-staged": "^16.2.7",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "tzdata": "^1.0.47"
   }
 }

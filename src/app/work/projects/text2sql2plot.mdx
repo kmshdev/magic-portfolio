@@ -1,0 +1,86 @@
+---
+title: "Text2SQL2Plot: Natural Language Analytics for Turbomachinery"
+publishedAt: "2023-07-10"
+summary: "An LLM-powered analytics agent that translates natural language queries into SQL and visualizations, reducing turbomachinery repair time by 20%."
+images:
+  - "/images/projects/text2sql2plot/cover.jpg"
+team:
+  - name: "Keshav Mishra"
+    role: "LLM and MLOps Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/keshav98"
+---
+
+## Overview
+
+Text2SQL2Plot is an LLM-powered analytics agent designed for turbomachinery maintenance teams in the oil & gas industry. It enables engineers to query complex time-series data using natural language, automatically generating SQL queries and visualizations to accelerate diagnostics and reduce repair time.
+
+## Problem Statement
+
+Turbomachinery engineers needed to analyze vast amounts of sensor data to diagnose issues, but lacked SQL expertise. Traditional BI tools required extensive training and couldn't handle the domain-specific queries engineers needed. This created bottlenecks in the diagnostic process, delaying repairs and increasing downtime costs.
+
+## Solution
+
+An intelligent agent that:
+1. Accepts natural language queries (e.g., "Show me vibration trends for Compressor A over the last 30 days")
+2. Translates queries into optimized SQL using an LLM with domain-specific context
+3. Executes queries against the time-series database
+4. Generates appropriate visualizations (line charts, heatmaps, scatter plots)
+5. Provides diagnostic insights based on patterns
+
+## Key Features
+
+- **Domain-Aware Translation**: Fine-tuned LLM with turbomachinery domain knowledge for accurate SQL generation
+- **Visualization Intelligence**: Automatically selects appropriate chart types based on query intent and data characteristics
+- **Error Handling**: Gracefully handles ambiguous queries with clarifying questions
+- **Performance Optimization**: Query optimization layer ensures fast execution on large time-series datasets
+- **Audit Trail**: Logs all queries and results for compliance and analysis
+
+## Technologies Used
+
+- **Python**: Core implementation language
+- **LangChain**: LLM orchestration and prompt engineering
+- **OpenAI GPT-4**: Natural language understanding and SQL generation
+- **TimescaleDB**: Time-series database for sensor data
+- **Plotly**: Interactive visualization generation
+- **FastAPI**: REST API for integration with existing tools
+- **Docker**: Containerized deployment
+
+## Impact
+
+**Quantifiable Results**:
+- **20% reduction in average repair time** (from 8 hours to 6.4 hours)
+- **60% reduction in SQL training costs** for new engineers
+- **85% query accuracy** on complex analytical questions
+- **Deployed across 15 facilities** in oil & gas operations
+
+**User Feedback**:
+> "This tool has transformed how we diagnose issues. What used to take hours of SQL wrangling now takes seconds." - Senior Maintenance Engineer
+
+## Technical Challenges
+
+1. **Domain Adaptation**: Generic LLMs struggled with turbomachinery terminology. Solution: Created domain-specific few-shot examples and fine-tuned prompts.
+2. **Query Ambiguity**: Natural language is inherently ambiguous. Solution: Implemented clarification dialog system and confidence scoring.
+3. **Performance at Scale**: Large time-series queries were slow. Solution: Added intelligent query optimization and result caching.
+4. **Reliability**: Production systems require high accuracy. Solution: Implemented validation layer and fallback mechanisms.
+
+## Architecture
+
+```
+User Query → LLM (Intent + SQL Generation) → Validator → TimescaleDB
+                                                              ↓
+User ← Visualization ← Chart Generator ← Result Processor ← Query Result
+```
+
+## Lessons Learned
+
+- **Domain expertise is critical**: Generic LLMs need domain-specific context to be production-ready
+- **User trust requires transparency**: Showing generated SQL builds confidence
+- **Error handling is paramount**: Graceful degradation is more important than perfect accuracy
+- **Iteration with users**: Continuous feedback loops dramatically improved query accuracy
+
+## Outcome
+
+Text2SQL2Plot has become an essential tool in the maintenance workflow, demonstrating the power of LLMs to bridge the gap between domain expertise and technical skills. The 20% efficiency improvement translates to millions in cost savings across deployed facilities.
+
+**Status**: Deployed in production, actively maintained
