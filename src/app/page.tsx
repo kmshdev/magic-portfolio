@@ -1,21 +1,21 @@
 import {
-  Heading,
-  Text,
-  Button,
   Avatar,
-  RevealFx,
-  Column,
   Badge,
-  Row,
-  Schema,
-  Meta,
+  Button,
+  Column,
+  Heading,
   Line,
   MatrixFx,
+  Meta,
+  RevealFx,
+  Row,
+  Schema,
+  Text,
 } from "@once-ui-system/core";
-import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
-import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
+import { Projects } from "@/components/work/Projects";
+import { about, baseURL, home, person, routes } from "@/resources";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -58,7 +58,12 @@ export default function Home() {
           pointerEvents="none"
           style={{ opacity: 0.3 }}
         />
-        <Column maxWidth="s" horizontal="center" align="center" style={{ position: "relative", zIndex: 1 }}>
+        <Column
+          maxWidth="s"
+          horizontal="center"
+          align="center"
+          style={{ position: "relative", zIndex: 1 }}
+        >
           {home.featured.display && (
             <RevealFx
               fillWidth
