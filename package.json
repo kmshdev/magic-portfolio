@@ -1,6 +1,16 @@
 {
-  "name": "@once-ui-system/magic-portfolio",
+  "name": "kmsh-portfolio",
   "version": "2.3.0",
+  "description": "Professional portfolio for Keshav Mishra (kmsh) - LLM and ML Engineer",
+  "author": "Keshav Mishra <me@kmsh.dev>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshav1998/magic-portfolio.git"
+  },
+  "homepage": "https://kmsh.dev",
+  "bugs": {
+    "url": "https://github.com/keshav1998/magic-portfolio/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "export": "next export",

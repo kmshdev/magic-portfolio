@@ -1,91 +1,268 @@
-# Magic Portfolio
+# Keshav Mishra (kmsh) - Portfolio
 
-Magic Portfolio is a simple, clean, beginner-friendly portfolio template. It supports an MDX-based content system for projects and blog posts, an about / CV page and a gallery.
+A modern, performant portfolio website built with Next.js 16, React 19, and TypeScript. Showcasing LLM engineering work, autonomous agent platforms, and technical projects through a clean, accessible interface powered by the Once UI design system.
 
-View the demo [here](https://demo.magic-portfolio.com).
+![Portfolio Preview](public/images/og/home.jpg)
 
-![Magic Portfolio](public/images/og/home.jpg)
+## About
 
-## Getting started
+This portfolio serves as a professional showcase for **Keshav Mishra** (kmsh), an LLM and ML Engineer specializing in autonomous agent platforms, large language models, and MLOps. The site features:
+
+- **Work Portfolio** - Featured projects and case studies
+- **Technical Blog** - Articles on LLM engineering, autonomous agents, and MLOps
+- **About/CV** - Professional background and experience
+- **Gallery** - Visual design work and explorations
+
+**Live Site:** [kmsh.dev](https://kmsh.dev)
+
+## Tech Stack
+
+### Core Technologies
+- **Next.js 16.1.6** - React framework with App Router
+- **React 19.2.4** - UI library with latest features
+- **TypeScript 5.9.3** - Type-safe development
+- **Once UI 1.5.14** - Design system and component library
+
+### Development Tools
+- **Biome 2.3.13** - Fast linter and formatter
+- **ESLint 9.39.2** - Code quality enforcement
+- **Sass 1.97.3** - Advanced styling capabilities
+
+### Content & Features
+- **MDX** - Markdown with JSX for rich content
+- **Next/OG** - Automatic Open Graph image generation
+- **Schema.org** - Structured data for SEO
+- **Responsive Design** - Optimized for all devices
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js 20.9+** (required for Next.js 16)
+- **npm** or **pnpm** package manager
+
+### Installation
 
 **1. Clone the repository**
-```
-git clone https://github.com/once-ui-system/magic-portfolio.git
+```bash
+git clone https://github.com/keshav1998/magic-portfolio.git
+cd magic-portfolio
 ```
 
 **2. Install dependencies**
-```
+```bash
 npm install
 ```
 
-**3. Run dev server**
-```
+**3. Run development server**
+```bash
 npm run dev
 ```
 
-**4. Edit config**
-```
-src/resources/once-ui.config.js
+Open [http://localhost:3000](http://localhost:3000) to view the site.
+
+**4. Build for production**
+```bash
+npm run build
+npm start
 ```
 
-**5. Edit content**
+## Configuration
+
+### Design System
+
+Edit the Once UI configuration to customize colors, typography, and design tokens:
+
 ```
-src/resources/content.js
+src/resources/once-ui.config.ts
 ```
 
-**6. Create blog posts / projects**
+### Content
+
+Update portfolio content, personal information, and site metadata:
+
 ```
-Add a new .mdx file to src/app/blog/posts or src/app/work/projects
+src/resources/content.tsx
 ```
 
-Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
+### Custom Styles
 
-## Documentation
+Add custom CSS for additional styling:
 
-Docs available at: [docs.once-ui.com](https://docs.once-ui.com/docs/magic-portfolio/quick-start)
+```
+src/resources/custom.css
+```
+
+## Content Management
+
+### Blog Posts
+
+Create new blog posts by adding MDX files:
+
+```
+src/app/blog/posts/your-post-title.mdx
+```
+
+### Projects
+
+Add project case studies:
+
+```
+src/app/work/projects/your-project.mdx
+```
+
+### MDX Features
+
+- Full Markdown syntax support
+- JSX components within content
+- Code syntax highlighting
+- Frontmatter metadata
+- Automatic table of contents
+
+## Development
+
+### Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm start            # Start production server
+npm run lint         # Run ESLint
+npm run biome-write  # Format code with Biome
+```
+
+### Code Quality
+
+This project follows strict code quality standards:
+
+- **TypeScript** for type safety
+- **Biome** for fast, consistent formatting
+- **ESLint** for code quality rules
+- **Immutability patterns** throughout codebase
+- **Component-driven architecture**
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development guidelines.
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   ├── blog/              # Blog pages and posts
+│   ├── work/              # Portfolio projects
+│   ├── about/             # About/CV page
+│   ├── gallery/           # Gallery page
+│   └── layout.tsx         # Root layout
+├── components/            # React components
+│   ├── blog/             # Blog-specific components
+│   ├── work/             # Portfolio components
+│   └── ...               # Shared components
+├── resources/            # Configuration and content
+│   ├── content.tsx       # Site content
+│   ├── once-ui.config.ts # Design system config
+│   └── custom.css        # Custom styles
+└── types/                # TypeScript type definitions
+
+public/
+├── images/               # Static images
+│   ├── avatar.jpg       # Profile photo
+│   └── og/              # Open Graph images
+└── ...                  # Other static assets
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+This portfolio is optimized for deployment on Vercel:
+
+1. Push your code to GitHub
+2. Import project in Vercel dashboard
+3. Vercel will auto-detect Next.js and configure build settings
+4. Deploy with zero configuration
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkeshav1998%2Fmagic-portfolio)
+
+### Other Platforms
+
+The site can be deployed to any platform supporting Next.js:
+
+- **Netlify** - Configure build command: `npm run build`
+- **Cloudflare Pages** - Supports Next.js with adapter
+- **Self-hosted** - Use `npm run build && npm start`
+
+See [Next.js deployment documentation](https://nextjs.org/docs/app/guides/deploying) for platform-specific guides.
+
+## CI/CD
+
+Automated workflows ensure code quality and deployment reliability:
+
+- **Continuous Integration** - Automated testing and linting on every PR
+- **Dependency Updates** - Automated security and version updates
+- **Preview Deployments** - Every PR gets a preview URL
+- **Production Deployment** - Automatic deployment on main branch merge
+
+See [`.github/workflows/`](.github/workflows/) for pipeline configurations.
 
 ## Features
 
-### Once UI
-- All tokens, components & features of [Once UI](https://once-ui.com)
+### SEO & Performance
 
-### SEO
-- Automatic open-graph and X image generation with next/og
-- Automatic schema and metadata generation based on the content file
+- ✅ Automatic Open Graph image generation
+- ✅ Schema.org structured data
+- ✅ Optimized images with Next.js Image component
+- ✅ Static generation for optimal performance
+- ✅ Responsive design for all devices
 
-### Design
-- Responsive layout optimized for all screen sizes
-- Timeless design without heavy animations and motion
-- Endless customization options through [data attributes](https://once-ui.com/docs/theming)
+### Content Features
 
-### Content
-- Render sections conditionally based on the content file
-- Enable or disable pages for blog, work, gallery and about / CV
-- Generate and display social links automatically
-- Set up password protection for URLs
+- ✅ MDX-powered blog and projects
+- ✅ Conditional section rendering
+- ✅ Password-protected pages
+- ✅ Automatic social link generation
+- ✅ Dark/light mode support
 
-### Localization
-- A localized, earlier version of Magic Portfolio is available with the next-intl library
-- To use localization, switch to the 'i18n' branch
+### Developer Experience
 
-## Creators
+- ✅ TypeScript for type safety
+- ✅ Fast refresh during development
+- ✅ Component-driven architecture
+- ✅ Comprehensive linting and formatting
+- ✅ Modern tooling (Biome, ESLint)
 
-Lorant One: [Threads](https://www.threads.net/@lorant.one) / [LinkedIn](https://www.linkedin.com/in/lorant-one/)
+## Browser Support
 
-## Get involved
-
-- Join the Design Engineers Club on [Discord](https://discord.com/invite/5EyAQ4eNdS) and share your project with us!
-- Deployed your docs? Share it on the [Once UI Hub](https://once-ui.com/hub) too! We feature our favorite apps on our landing page.
+- Chrome/Edge (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Mobile browsers (iOS Safari, Chrome Android)
 
 ## License
 
-Distributed under the CC BY-NC 4.0 License.
-- Attribution is required.
-- Commercial usage is not allowed.
-- You can extend the license to [Dopler CC](https://dopler.app/license) by purchasing a [Once UI Pro](https://once-ui.com/pricing) license.
+This project is based on [Magic Portfolio](https://github.com/once-ui-system/magic-portfolio) by Once UI.
 
-See `LICENSE.txt` for more information.
+**Original Template License:** CC BY-NC 4.0
+- Attribution required
+- Commercial usage not allowed without [Once UI Pro](https://once-ui.com/pricing) license
 
-## Deploy with Vercel
+**This Portfolio:** Personal use for Selene Yu's professional portfolio.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&project-name=portfolio&repository-name=portfolio&redirect-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&demo-title=Magic%20Portfolio&demo-description=Showcase%20your%20designers%20or%20developer%20portfolio&demo-url=https%3A%2F%2Fdemo.magic-portfolio.com&demo-image=%2F%2Fraw.githubusercontent.com%2Fonce-ui-system%2Fmagic-portfolio%2Fmain%2Fpublic%2Fimages%2Fog%2Fhome.jpg)
+## Acknowledgments
+
+- **Once UI** - Design system and component library
+- **Magic Portfolio** - Original template foundation
+- **Next.js Team** - React framework
+- **Vercel** - Hosting and deployment platform
+
+## Contact
+
+**Selene Yu** - Design Engineer
+
+- Portfolio: [Your website URL]
+- GitHub: [@keshav1998](https://github.com/keshav1998)
+- [Other social links from your content.tsx]
+
+---
+
+Built with ❤️ using [Next.js](https://nextjs.org) and [Once UI](https://once-ui.com)
