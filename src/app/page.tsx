@@ -11,6 +11,7 @@ import {
   Row,
   Schema,
   Text,
+  TypeFx,
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
@@ -87,7 +88,17 @@ export default function Home() {
           )}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
             <Heading wrap="balance" variant="display-strong-l">
-              {home.headline}
+              <TypeFx
+                words={[
+                  "Building bridges between design and code",
+                  "Crafting intuitive user experiences",
+                  "Creating beautiful digital products",
+                ]}
+                speed={80}
+                hold={2500}
+                delay={300}
+                trigger="instant"
+              />
             </Heading>
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
