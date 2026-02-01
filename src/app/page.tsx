@@ -90,7 +90,11 @@ export default function Home() {
             </RevealFx>
           )}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading wrap="balance" variant="display-strong-l">
+            <Heading
+              wrap="balance"
+              variant="display-strong-l"
+              aria-label="Building bridges between design and code"
+            >
               <TypeFx
                 words={[
                   "Building bridges between design and code",
@@ -101,6 +105,7 @@ export default function Home() {
                 hold={2500}
                 delay={300}
                 trigger="instant"
+                aria-hidden="true"
               />
             </Heading>
           </RevealFx>
