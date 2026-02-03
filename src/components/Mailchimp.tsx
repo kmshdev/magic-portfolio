@@ -1,9 +1,18 @@
 "use client";
 
-import { mailchimp, newsletter } from "@/resources";
-import { Button, Heading, Input, Text, Background, Column, Row } from "@once-ui-system/core";
-import { opacity, SpacingToken } from "@once-ui-system/core";
+import {
+  Background,
+  Button,
+  Column,
+  Heading,
+  Input,
+  type opacity,
+  Row,
+  type SpacingToken,
+  Text,
+} from "@once-ui-system/core";
 import { useState } from "react";
+import { mailchimp, newsletter } from "@/resources";
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T {
   let timeout: ReturnType<typeof setTimeout>;
@@ -16,7 +25,7 @@ function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T
 export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...flex }) => {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [touched, setTouched] = useState<boolean>(false);
+  const [_touched, setTouched] = useState<boolean>(false);
 
   const validateEmail = (email: string): boolean => {
     if (email === "") {
