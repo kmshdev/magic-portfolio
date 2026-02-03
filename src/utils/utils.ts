@@ -69,6 +69,23 @@ function getMDXData(dir: string) {
 }
 
 export function getPosts(customPath = ["", "", "", ""]) {
-  const postsDir = path.join(process.cwd(), ...customPath);
+  // Sanitize each path component to prevent path traversal attacks
+  const safePath = customPath.map((component) =>
+    component
+      .replace(/\.\./g, "") // Remove ..
+      .replace(/^\//, "") // Remove leading /
+      .replace(/\\/g, "/") // Normalize slashes
+  );
+
+  const postsDir = path.join(process.cwd(), ...safePath);
+
+  // Verify path is within project directory (defense in depth)
+  const resolvedPath = path.resolve(postsDir);
+  const projectRoot = path.resolve(process.cwd());
+
+  if (!resolvedPath.startsWith(projectRoot)) {
+    throw new Error("Invalid path: Path traversal attempt detected");
+  }
+
   return getMDXData(postsDir);
 }
