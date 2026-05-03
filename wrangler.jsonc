@@ -9,7 +9,7 @@
     "binding": "ASSETS"
   },
   "build": {
-    "command": "npm run cf:build"
+    "command": "test -f .open-next/worker.js || npm run cf:build"
   },
   "observability": {
     "enabled": true

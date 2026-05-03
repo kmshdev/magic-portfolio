@@ -82,9 +82,9 @@ npm run ci           # Full CI check (type-check + lint + build)
 
 Cloudflare Workers via OpenNext. Workers Builds should use `npm ci` as the build command
 and `npm run cf:deploy` as the production deploy command. `wrangler.jsonc` also defines
-`build.command` so PR preview uploads run `npm run cf:build` before Wrangler reads
-`.open-next/worker.js`. GitHub Actions deploys pushes to `develop` with
-`cloudflare/wrangler-action`.
+`build.command` so PR preview uploads build `.open-next/worker.js` when it is missing,
+without rebuilding after OpenNext has populated production cache assets. GitHub Actions
+deploys pushes to `develop` with `cloudflare/wrangler-action`.
 
 **Environment variables** (optional):
 - `PAGE_ACCESS_PASSWORD` - Enable route protection

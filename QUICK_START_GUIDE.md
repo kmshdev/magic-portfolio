@@ -51,11 +51,11 @@ Open [http://localhost:3000](http://localhost:3000) to view your portfolio.
 2. Connect the repository in Cloudflare Workers Builds
 3. Set the build command to `npm ci`
 4. Set the deploy command to `npm run cf:deploy`
-5. Add required secrets, including `PAGE_ACCESS_PASSWORD` for protected routes
+5. Add `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`
 6. Attach `kmsh.dev` and `www.kmsh.dev` as Worker custom domains
 
-`wrangler.jsonc` runs the OpenNext build before Wrangler deploys or uploads a preview, so
-Cloudflare PR builds have `.open-next/worker.js` available.
+`wrangler.jsonc` builds `.open-next/worker.js` when it is missing, so Cloudflare PR
+preview uploads work without rebuilding after OpenNext has populated production cache assets.
 
 Preview locally with the Cloudflare runtime before deploying:
 

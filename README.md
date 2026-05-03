@@ -177,11 +177,11 @@ NEXT_PUBLIC_GA_ID=your_google_analytics_id
 1. Connect the repository in Cloudflare Workers Builds
 2. Set the build command to `npm ci`
 3. Set the deploy command to `npm run cf:deploy`
-4. Set required secrets, including `PAGE_ACCESS_PASSWORD` when protected routes are enabled
+4. Set `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`
 5. Attach `kmsh.dev` and `www.kmsh.dev` as Worker custom domains
 
-The Wrangler config runs `npm run cf:build` before Wrangler deploys or uploads a preview,
-so PR preview builds generate `.open-next/worker.js` before Cloudflare's preview upload.
+The Wrangler config builds `.open-next/worker.js` when it is missing, so PR preview
+uploads work without rebuilding after OpenNext has populated production cache assets.
 
 ### Manual Deployment
 
