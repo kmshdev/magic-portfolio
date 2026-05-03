@@ -61,7 +61,7 @@ npm run ci           # Full CI check (type-check + lint + build)
 **CI workflow** (`.github/workflows/ci.yml`):
 - Triggers: PRs and pushes to `main`/`develop` branches
 - Steps: type-check → lint (format + lint, warnings fail) → build
-- Cloudflare deploy: pushes to `develop` build and deploy the Worker with Wrangler
+- Cloudflare deploy: pushes to `main` build and deploy the Worker with Wrangler
 - Caching: Next.js build cache, node_modules via npm cache
 - Timeout: 10 minutes, concurrent runs cancelled on same branch
 - Bundle size report in GitHub Actions summary
@@ -84,7 +84,7 @@ Cloudflare Workers via OpenNext. Workers Builds should use `npm ci` as the build
 and `npm run cf:deploy` as the production deploy command. `wrangler.jsonc` also defines
 `build.command` so PR preview uploads build `.open-next/worker.js` when it is missing,
 without rebuilding after OpenNext has populated production cache assets. GitHub Actions
-deploys pushes to `develop` with `cloudflare/wrangler-action`.
+deploys pushes to `main` with `cloudflare/wrangler-action`.
 
 **Environment variables** (optional):
 - `PAGE_ACCESS_PASSWORD` - Enable route protection
