@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateUrlForSSRF } from "../utils";
 
-export const runtime = "edge";
-
 function decodeHTMLEntities(text: string): string {
   return text.replace(/&(#?[a-zA-Z0-9]+);/g, (match, entity) => {
     const entities: { [key: string]: string } = {

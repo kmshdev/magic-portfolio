@@ -45,22 +45,20 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view your portfolio.
 
-### 5. Deploy to Vercel
+### 5. Deploy to Cloudflare Workers
 
-**Option A: Using GitHub**
 1. Push your changes to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Click "New Project"
-4. Import your GitHub repository
-5. Vercel will auto-detect Next.js and deploy
+2. Connect the repository in Cloudflare Workers Builds
+3. Set the build command to `npm ci`
+4. Set the deploy command to `npm run cf:deploy`
+5. Add required secrets, including `PAGE_ACCESS_PASSWORD` for protected routes
+6. Attach `kmsh.dev` and `www.kmsh.dev` as Worker custom domains
 
-**Option B: Using Vercel CLI**
+Preview locally with the Cloudflare runtime before deploying:
+
 ```bash
-npm install -g vercel
-vercel
+npm run cf:preview
 ```
-
-Follow the prompts to deploy.
 
 ## Content Customization
 
@@ -256,8 +254,8 @@ Make sure all TypeScript types are correct. Check:
 - Verify image formats (JPG, PNG, WebP supported)
 
 ### Deployment Issues
-- Ensure Node.js version is 18.17 or higher
-- Check all environment variables are set in Vercel
+- Ensure Node.js version is 22 or higher for Cloudflare deploy tooling
+- Check all environment variables and secrets are set in Cloudflare
 - Verify build completes successfully locally first
 
 ## Development Commands
@@ -332,7 +330,7 @@ magic-portfolio/
 - [ ] Add your professional photo
 - [ ] Add project cover images
 - [ ] Update domain in config
-- [ ] Deploy to Vercel
+- [ ] Deploy to Cloudflare Workers
 - [ ] Test on mobile devices
 - [ ] Share with your network!
 

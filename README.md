@@ -22,11 +22,11 @@ This portfolio highlights my expertise in:
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **UI Library**: Once UI Core
 - **Styling**: CSS Modules + Once UI theming system
 - **Content**: MDX for blog posts and project case studies
-- **Deployment**: Vercel
+- **Deployment**: Cloudflare Workers with OpenNext
 
 ## Getting Started
 
@@ -172,23 +172,21 @@ NEXT_PUBLIC_GA_ID=your_google_analytics_id
 
 ## Deployment
 
-### Deploy to Vercel (Recommended)
+### Deploy to Cloudflare Workers
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkeshav1998%2Fmagic-portfolio)
-
-1. Click the button above
-2. Connect your GitHub account
-3. Configure environment variables (if needed)
-4. Deploy!
+1. Connect the repository in Cloudflare Workers Builds
+2. Set the build command to `npm ci`
+3. Set the deploy command to `npm run cf:deploy`
+4. Set required secrets, including `PAGE_ACCESS_PASSWORD` when protected routes are enabled
+5. Attach `kmsh.dev` and `www.kmsh.dev` as Worker custom domains
 
 ### Manual Deployment
 
 ```bash
-npm run build
-npm start
+npm run cf:deploy
 ```
 
-Deploy the `.next` folder to any Node.js hosting provider.
+Use `npm run cf:preview` to verify the OpenNext Worker locally before deploying.
 
 ## Documentation
 

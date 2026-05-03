@@ -1,7 +1,7 @@
 # Magic Portfolio
 
 LLM/ML engineer portfolio built on Once UI Magic Portfolio template.
-Next.js 16 App Router + MDX content. Production site at keshav-mishra.dev.
+Next.js 16 App Router + MDX content. Production site at kmsh.dev.
 
 ## Critical Files
 
@@ -61,6 +61,7 @@ npm run ci           # Full CI check (type-check + lint + build)
 **CI workflow** (`.github/workflows/ci.yml`):
 - Triggers: PRs and pushes to `main`/`develop` branches
 - Steps: type-check → lint (format + lint, warnings fail) → build
+- Cloudflare deploy: pushes to `develop` build and deploy the Worker with Wrangler
 - Caching: Next.js build cache, node_modules via npm cache
 - Timeout: 10 minutes, concurrent runs cancelled on same branch
 - Bundle size report in GitHub Actions summary
@@ -79,10 +80,12 @@ npm run ci           # Full CI check (type-check + lint + build)
 
 ## Deployment
 
-Vercel (standard Next.js, no custom config). Auto-deploys from main.
+Cloudflare Workers via OpenNext. Workers Builds should use `npm ci` as the build command
+and `npm run cf:deploy` as the deploy command. GitHub Actions also deploys pushes to
+`develop` with `cloudflare/wrangler-action`.
 
 **Environment variables** (optional):
-- `PASSWORD` - Enable route protection
+- `PAGE_ACCESS_PASSWORD` - Enable route protection
 - `GA_MEASUREMENT_ID` - Google Analytics
 
 ## PR Checklist

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { notFound } from "next/navigation";
 
 export type Team = {
   name: string;
@@ -26,8 +27,6 @@ export type MdxPost = {
   slug: string;
   content: string;
 };
-
-import { notFound } from "next/navigation";
 
 function getMDXFiles(dir: string) {
   if (!fs.existsSync(dir)) {
@@ -74,7 +73,31 @@ function getMDXData(dir: string): MdxPost[] {
   });
 }
 
-export function getPosts(customPath = ["", "", "", ""]) {
-  const postsDir = path.join(process.cwd(), ...customPath);
+function resolvePostsDir(customPath: string[]) {
+  const normalizedPath = customPath.join("/");
+  const resolveExistingDir = (...segments: string[]) => {
+    const candidates = [path.join(process.cwd(), ...segments), path.join(...segments)];
+    const existingDir = candidates.find((candidate) => fs.existsSync(candidate));
+
+    if (!existingDir) {
+      notFound();
+    }
+
+    return existingDir;
+  };
+
+  if (normalizedPath === "src/app/blog/posts") {
+    return resolveExistingDir("src", "app", "blog", "posts");
+  }
+
+  if (normalizedPath === "src/app/work/projects") {
+    return resolveExistingDir("src", "app", "work", "projects");
+  }
+
+  notFound();
+}
+
+export function getPosts(customPath = ["src", "app", "blog", "posts"]) {
+  const postsDir = resolvePostsDir(customPath);
   return getMDXData(postsDir);
 }
