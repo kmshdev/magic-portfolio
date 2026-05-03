@@ -54,6 +54,9 @@ Open [http://localhost:3000](http://localhost:3000) to view your portfolio.
 5. Add required secrets, including `PAGE_ACCESS_PASSWORD` for protected routes
 6. Attach `kmsh.dev` and `www.kmsh.dev` as Worker custom domains
 
+`wrangler.jsonc` runs the OpenNext build before Wrangler deploys or uploads a preview, so
+Cloudflare PR builds have `.open-next/worker.js` available.
+
 Preview locally with the Cloudflare runtime before deploying:
 
 ```bash

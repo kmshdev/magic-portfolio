@@ -180,6 +180,9 @@ NEXT_PUBLIC_GA_ID=your_google_analytics_id
 4. Set required secrets, including `PAGE_ACCESS_PASSWORD` when protected routes are enabled
 5. Attach `kmsh.dev` and `www.kmsh.dev` as Worker custom domains
 
+The Wrangler config runs `npm run cf:build` before Wrangler deploys or uploads a preview,
+so PR preview builds generate `.open-next/worker.js` before Cloudflare's preview upload.
+
 ### Manual Deployment
 
 ```bash
