@@ -43,12 +43,12 @@ npm run dev          # Dev server :3000
 npm run build        # Production build (must pass before PR)
 npm run format       # Format code with Biome (write mode)
 npm run format:check # Format check (read-only)
-npm run lint         # Lint check with Biome
+npm run lint         # Biome CI check; warnings fail
 npm run lint:fix     # Lint + auto-fix with Biome
 npm run type-check   # TypeScript type checking
 npm run check        # Lint + format + fix
 npm run check:all    # Type-check + lint + format + fix
-npm run ci           # Full CI check (type-check + format:check + lint + build)
+npm run ci           # Full CI check (type-check + lint + build)
 ```
 
 **Tooling**: Biome 2.x (formatter + linter), Lefthook (git hooks), lint-staged (pre-commit)
@@ -60,7 +60,7 @@ npm run ci           # Full CI check (type-check + format:check + lint + build)
 
 **CI workflow** (`.github/workflows/ci.yml`):
 - Triggers: PRs and pushes to `main`/`develop` branches
-- Steps: type-check → format:check → lint → build
+- Steps: type-check → lint (format + lint, warnings fail) → build
 - Caching: Next.js build cache, node_modules via npm cache
 - Timeout: 10 minutes, concurrent runs cancelled on same branch
 - Bundle size report in GitHub Actions summary
@@ -75,6 +75,7 @@ npm run ci           # Full CI check (type-check + format:check + lint + build)
   - A11y: `useAltText` (warn)
 - Targets: JS/TS/JSX/TSX, JSON, MDX, Markdown
 - VCS integration: Respects .gitignore, excludes .next/out/node_modules/.vercel/.turbo
+- CI mode: `npm run lint` uses `biome ci --error-on-warnings`
 
 ## Deployment
 

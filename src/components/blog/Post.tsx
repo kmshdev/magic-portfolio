@@ -3,9 +3,10 @@
 import { Avatar, Card, Column, Media, Row, Text } from "@once-ui-system/core";
 import { person } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
+import type { MdxPost } from "@/utils/utils";
 
 interface PostProps {
-  post: any;
+  post: MdxPost;
   thumbnail: boolean;
   direction?: "row" | "column";
 }

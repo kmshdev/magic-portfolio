@@ -76,7 +76,7 @@ function isPrivateIP(ip: string): boolean {
  */
 function isPrivateIPv4(ip: string): boolean {
   const parts = ip.split(".").map((p) => parseInt(p, 10));
-  if (parts.some((p) => isNaN(p) || p < 0 || p > 255)) return false;
+  if (parts.some((p) => Number.isNaN(p) || p < 0 || p > 255)) return false;
 
   const [a, b, c, d] = parts;
 

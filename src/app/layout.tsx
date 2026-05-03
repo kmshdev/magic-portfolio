@@ -46,6 +46,7 @@ export default async function RootLayout({
       <head>
         <script
           id="theme-init"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: Inline boot script prevents a theme flash before React hydrates.
           dangerouslySetInnerHTML={{
             __html: `
               (function() {

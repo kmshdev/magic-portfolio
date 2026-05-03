@@ -62,7 +62,9 @@ export async function GET(request: Request) {
             gap: "5rem",
           }}
         >
+          {/* biome-ignore lint/performance/noImgElement: next/image is not supported inside next/og ImageResponse. */}
           <img
+            alt=""
             src={baseURL + person.avatar}
             style={{
               width: "12rem",

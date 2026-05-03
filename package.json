@@ -16,7 +16,7 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "lint": "biome check .",
+    "lint": "biome ci --error-on-warnings --max-diagnostics=none .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "format:check": "biome format .",
@@ -26,7 +26,7 @@
     "clean": "rm -rf .next out .turbo node_modules/.cache",
     "clean:all": "npm run clean && rm -rf node_modules",
     "prepare": "lefthook install || true",
-    "ci": "npm run type-check && npm run format:check && npm run lint && npm run build"
+    "ci": "npm run type-check && npm run lint && npm run build"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
