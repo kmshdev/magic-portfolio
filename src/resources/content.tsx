@@ -117,35 +117,65 @@ const about: About = {
         timeframe: "April 2024 - July 2025",
         role: "Lead LLM Engineer, Autonomous Agent Platforms",
         achievements: [
-          <>
-            Conceived, architected, and implemented <strong>Genie</strong>, Valory's flagship
-            LLM-driven code generation and agent scaffolding platform—an industry-first system
-            enabling autonomous agent and service creation from natural language.
-          </>,
-          <>
-            Directly reduced agent/service prototyping time from weeks to minutes, democratizing
-            autonomous agent development for both technical and non-technical users.
-          </>,
-          <>
-            Architected and developed <strong>agents-fun-eliza</strong>, an autonomous agent for the
-            Agents.fun ecosystem, leveraging the Eliza framework to deliver fully open-sourced,
-            interactive, and extensible conversational agents.
-          </>,
-          <>
-            Published and maintained <strong>plugin-memeooorr</strong>—a TypeScript-based
-            open-source package, released on npm, enabling meme-centric agent extensions and
-            community creativity.
-          </>,
-          <>
-            Engineered robust LLM prompt engineering pipelines, enabling semantic-to-formal
-            translation for agent behaviors and FSMs, with feedback loops and error handling for
-            high-reliability code generation.
-          </>,
-          <>
-            Enhanced agent orchestration and deployment pipelines using containerization
-            (Docker/Kubernetes), CI/CD, MLflow, and best MLOps practices—delivering reproducible,
-            secure, and scalable agent workflows.
-          </>,
+          {
+            id: "valory-genie-platform",
+            content: (
+              <>
+                Conceived, architected, and implemented <strong>Genie</strong>, Valory's flagship
+                LLM-driven code generation and agent scaffolding platform—an industry-first system
+                enabling autonomous agent and service creation from natural language.
+              </>
+            ),
+          },
+          {
+            id: "valory-prototyping-collapsed",
+            content: (
+              <>
+                Directly reduced agent/service prototyping time from weeks to minutes, democratizing
+                autonomous agent development for both technical and non-technical users.
+              </>
+            ),
+          },
+          {
+            id: "valory-agents-fun-eliza",
+            content: (
+              <>
+                Architected and developed <strong>agents-fun-eliza</strong>, an autonomous agent for
+                the Agents.fun ecosystem, leveraging the Eliza framework to deliver fully
+                open-sourced, interactive, and extensible conversational agents.
+              </>
+            ),
+          },
+          {
+            id: "valory-plugin-memeooorr",
+            content: (
+              <>
+                Published and maintained <strong>plugin-memeooorr</strong>—a TypeScript-based
+                open-source package, released on npm, enabling meme-centric agent extensions and
+                community creativity.
+              </>
+            ),
+          },
+          {
+            id: "valory-prompt-pipelines",
+            content: (
+              <>
+                Engineered robust LLM prompt engineering pipelines, enabling semantic-to-formal
+                translation for agent behaviors and FSMs, with feedback loops and error handling for
+                high-reliability code generation.
+              </>
+            ),
+          },
+          {
+            id: "valory-agent-mlops",
+            content: (
+              <>
+                Enhanced agent orchestration and deployment pipelines using containerization
+                (Docker/Kubernetes), CI/CD, MLflow, and best MLOps practices—delivering
+                reproducible, secure, and scalable agent workflows.
+              </>
+            ),
+          },
         ],
         images: [],
       },
@@ -154,40 +184,80 @@ const about: About = {
         timeframe: "Feb 2020 - March 2024",
         role: "LLM and MLOps Engineer",
         achievements: [
-          <>
-            Developed a <strong>RAG Agent</strong> for on-field agents to access and retrieve
-            maintenance logs, servicing records, and critical equipment data on-demand.
-          </>,
-          <>
-            Developed a <strong>Text2SQL2Plot LLM agent</strong> for field workers in turbomachinery
-            plants using Vanna.ai and GPT-4o-mini, reducing repair time by 20%.
-          </>,
-          <>
-            Fabricated end-to-end <strong>AutoML</strong> that auto tracks, hypertunes, deploys
-            models saving 100+ hrs monthly work.
-          </>,
-          <>
-            Built a <strong>LLM Role Assistant</strong> tool based on internal alerts data with
-            LangChain & GPT-4 saving 200+ man hours monthly, which performs work equal to 4 team
-            members of alert management team.
-          </>,
-          <>
-            Pioneered a <strong>RAG based LLM chatbot</strong> using GPT-4 and LlamaIndex, that
-            allows user to interact with bot that has access to latest developments in Energy, Oil
-            and Gas fields, that is directly client facing for big Oil and Gas Clients.
-          </>,
-          <>
-            Built an in-house <strong>MLOps platform</strong> utilizing drift detection, MLflow,
-            automated model training, that reduced modeling related workload by 70%.
-          </>,
-          <>
-            Trained <strong>Mistral 7B model</strong> using on-premise data of alerts utilizing a
-            distributed framework that can scale to large datasets.
-          </>,
-          <>
-            Led a team of data scientists in developing a ML model that predicted the failure of
-            turbomachinery with <strong>96.5% accuracy</strong>.
-          </>,
+          {
+            id: "mech-rag-field-agent",
+            content: (
+              <>
+                Developed a <strong>RAG Agent</strong> for on-field agents to access and retrieve
+                maintenance logs, servicing records, and critical equipment data on-demand.
+              </>
+            ),
+          },
+          {
+            id: "mech-text2sql2plot",
+            content: (
+              <>
+                Developed a <strong>Text2SQL2Plot LLM agent</strong> for field workers in
+                turbomachinery plants using Vanna.ai and GPT-4o-mini, reducing repair time by 20%.
+              </>
+            ),
+          },
+          {
+            id: "mech-automl-pipeline",
+            content: (
+              <>
+                Fabricated end-to-end <strong>AutoML</strong> that auto tracks, hypertunes, deploys
+                models saving 100+ hrs monthly work.
+              </>
+            ),
+          },
+          {
+            id: "mech-role-assistant",
+            content: (
+              <>
+                Built a <strong>LLM Role Assistant</strong> tool based on internal alerts data with
+                LangChain & GPT-4 saving 200+ man hours monthly, which performs work equal to 4 team
+                members of alert management team.
+              </>
+            ),
+          },
+          {
+            id: "mech-oil-gas-chatbot",
+            content: (
+              <>
+                Pioneered a <strong>RAG based LLM chatbot</strong> using GPT-4 and LlamaIndex, that
+                allows user to interact with bot that has access to latest developments in Energy,
+                Oil and Gas fields, that is directly client facing for big Oil and Gas Clients.
+              </>
+            ),
+          },
+          {
+            id: "mech-mlops-platform",
+            content: (
+              <>
+                Built an in-house <strong>MLOps platform</strong> utilizing drift detection, MLflow,
+                automated model training, that reduced modeling related workload by 70%.
+              </>
+            ),
+          },
+          {
+            id: "mech-mistral-finetune",
+            content: (
+              <>
+                Trained <strong>Mistral 7B model</strong> using on-premise data of alerts utilizing
+                a distributed framework that can scale to large datasets.
+              </>
+            ),
+          },
+          {
+            id: "mech-failure-prediction",
+            content: (
+              <>
+                Led a team of data scientists in developing a ML model that predicted the failure of
+                turbomachinery with <strong>96.5% accuracy</strong>.
+              </>
+            ),
+          },
         ],
         images: [],
       },
@@ -304,4 +374,4 @@ const gallery: Gallery = {
   images: [],
 };
 
-export { person, social, home, about, blog, work, gallery, newsletter };
+export { about, blog, gallery, home, newsletter, person, social, work };
