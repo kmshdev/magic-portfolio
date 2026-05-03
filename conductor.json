@@ -2,7 +2,7 @@
   "scripts": {
     "setup": "./conductor-setup.sh",
     "run": "npm run dev -- --port $CONDUCTOR_PORT",
-    "archive": "rm -rf .next"
+    "archive": "./conductor-archive.sh"
   },
-  "runScriptMode": "nonconcurrent"
+  "runScriptMode": "concurrent"
 }

@@ -14,6 +14,10 @@ Next.js 16 App Router + MDX content. Production site at keshav-mishra.dev.
 | `src/app/blog/posts/*.mdx` | Blog posts |
 | `src/components/Providers.tsx` | ThemeProvider setup |
 | `src/components/ThemeToggle.tsx` | Theme switcher component |
+| `biome.json` | Biome config - formatter/linter rules |
+| `lefthook.yml` | Git hooks - pre-commit/pre-push automation |
+| `.lintstagedrc.json` | Lint-staged config - formats staged files |
+| `.github/workflows/ci.yml` | GitHub Actions CI - validates PRs |
 
 ## Once UI Rules
 
@@ -37,21 +41,40 @@ Next.js 16 App Router + MDX content. Production site at keshav-mishra.dev.
 ```bash
 npm run dev          # Dev server :3000
 npm run build        # Production build (must pass before PR)
-npm run format       # Format code with Biome
+npm run format       # Format code with Biome (write mode)
+npm run format:check # Format check (read-only)
 npm run lint         # Lint check with Biome
+npm run lint:fix     # Lint + auto-fix with Biome
 npm run type-check   # TypeScript type checking
-npm run check:all    # Type-check + lint + format
+npm run check        # Lint + format + fix
+npm run check:all    # Type-check + lint + format + fix
+npm run ci           # Full CI check (type-check + format:check + lint + build)
 ```
 
-**Tooling**: Biome (formatter + linter), Lefthook (git hooks), lint-staged (pre-commit)
-- Pre-commit: Auto-formats staged files via Biome
-- Pre-push: Runs type-check before push
-- CI: GitHub Actions validates build + lint + format + types on PRs
+**Tooling**: Biome 2.x (formatter + linter), Lefthook (git hooks), lint-staged (pre-commit)
+
+**Git hooks** (via Lefthook):
+- Pre-commit: Auto-formats staged files via Biome (parallel execution)
+- Pre-push: Runs `npm run type-check` to catch TypeScript errors
+- Skip hooks: `LEFTHOOK=0 git commit` or `git commit --no-verify`
+
+**CI workflow** (`.github/workflows/ci.yml`):
+- Triggers: PRs and pushes to `main`/`develop` branches
+- Steps: type-check → format:check → lint → build
+- Caching: Next.js build cache, node_modules via npm cache
+- Timeout: 10 minutes, concurrent runs cancelled on same branch
+- Bundle size report in GitHub Actions summary
 
 **Biome config** (`biome.json`):
-- Line width: 100, 2-space indent, double quotes
-- Rules: `noExplicitAny` (warn), `noDoubleEquals` (error), accessibility warnings
-- Formats: JS/TS/JSX/TSX, JSON, MDX, Markdown
+- Format: Line width 100, 2-space indent, double quotes, trailing commas
+- Lint rules:
+  - Suspicious: `noExplicitAny` (warn), `noDoubleEquals` (error), `noArrayIndexKey` (warn)
+  - Style: `noUnusedTemplateLiteral` (error)
+  - Performance: `noImgElement` (warn)
+  - Security: `noDangerouslySetInnerHtml` (warn)
+  - A11y: `useAltText` (warn)
+- Targets: JS/TS/JSX/TSX, JSON, MDX, Markdown
+- VCS integration: Respects .gitignore, excludes .next/out/node_modules/.vercel/.turbo
 
 ## Deployment
 
@@ -79,3 +102,7 @@ Vercel (standard Next.js, no custom config). Auto-deploys from main.
 - MDX frontmatter required: `title`, `publishedAt`, `summary`, `images`, `team`
 - Image paths are case-sensitive
 - Theme colors set in `once-ui.config.ts`, not component props
+- Biome auto-fixes on commit - staged files are formatted automatically
+- Pre-push hook runs type-check - fix TypeScript errors before pushing
+- CI requires `npm run build` to pass - test locally before PR
+- Skip hooks with `LEFTHOOK=0` for emergency commits (not recommended)
