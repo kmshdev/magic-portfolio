@@ -1,15 +1,16 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
+import { notFound } from "next/navigation";
 
-type Team = {
+export type Team = {
   name: string;
   role: string;
   avatar: string;
   linkedIn: string;
 };
 
-type Metadata = {
+export type PostMetadata = {
   title: string;
   subtitle?: string;
   publishedAt: string;
@@ -21,7 +22,11 @@ type Metadata = {
   link?: string;
 };
 
-import { notFound } from "next/navigation";
+export type MdxPost = {
+  metadata: PostMetadata;
+  slug: string;
+  content: string;
+};
 
 function getMDXFiles(dir: string) {
   if (!fs.existsSync(dir)) {
@@ -39,7 +44,7 @@ function readMDXFile(filePath: string) {
   const rawContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(rawContent);
 
-  const metadata: Metadata = {
+  const metadata: PostMetadata = {
     title: data.title || "",
     subtitle: data.subtitle || "",
     publishedAt: data.publishedAt,
@@ -54,7 +59,7 @@ function readMDXFile(filePath: string) {
   return { metadata, content };
 }
 
-function getMDXData(dir: string) {
+function getMDXData(dir: string): MdxPost[] {
   const mdxFiles = getMDXFiles(dir);
   return mdxFiles.map((file) => {
     const { metadata, content } = readMDXFile(path.join(dir, file));
@@ -68,7 +73,31 @@ function getMDXData(dir: string) {
   });
 }
 
-export function getPosts(customPath = ["", "", "", ""]) {
-  const postsDir = path.join(process.cwd(), ...customPath);
+function resolvePostsDir(customPath: string[]) {
+  const normalizedPath = customPath.join("/");
+  const resolveExistingDir = (...segments: string[]) => {
+    const candidates = [path.join(process.cwd(), ...segments), path.join(...segments)];
+    const existingDir = candidates.find((candidate) => fs.existsSync(candidate));
+
+    if (!existingDir) {
+      notFound();
+    }
+
+    return existingDir;
+  };
+
+  if (normalizedPath === "src/app/blog/posts") {
+    return resolveExistingDir("src", "app", "blog", "posts");
+  }
+
+  if (normalizedPath === "src/app/work/projects") {
+    return resolveExistingDir("src", "app", "work", "projects");
+  }
+
+  notFound();
+}
+
+export function getPosts(customPath = ["src", "app", "blog", "posts"]) {
+  const postsDir = resolvePostsDir(customPath);
   return getMDXData(postsDir);
 }

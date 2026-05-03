@@ -1,5 +1,5 @@
-import { IconName } from "@/resources/icons";
-import { zones } from "tzdata";
+import type { zones } from "tzdata";
+import type { IconName } from "@/resources/icons";
 
 /**
  * IANA time zone string (e.g., 'Asia/Calcutta', 'Europe/Vienna').
@@ -104,6 +104,20 @@ export interface Home extends BasePageConfig {
 }
 
 /**
+ * A single narrative beat within a work experience.
+ *
+ * The `id` is the stable identity used by React keys today and by the
+ * forthcoming Remotion video pipeline (scene IDs, voiceover alignment,
+ * deep-linkable beats). Use lowercase kebab-case, semantic — not positional.
+ */
+export type Achievement = {
+  /** Stable, editorially-chosen kebab-case identifier (e.g., "genie-architect") */
+  id: string;
+  /** The rendered content — JSX is fine */
+  content: React.ReactNode;
+};
+
+/**
  * About page configuration.
  * @description Configuration for the About page, including sections for table of contents, avatar, calendar, introduction, work experience, studies, and technical skills.
  */
@@ -150,8 +164,8 @@ export interface About extends BasePageConfig {
       timeframe: string;
       /** Role or job title */
       role: string;
-      /** Achievements at the company */
-      achievements: React.ReactNode[];
+      /** Achievements at the company — narrative beats with stable IDs */
+      achievements: Achievement[];
       /** Images related to the experience */
       images?: Array<{
         /** Image source path */

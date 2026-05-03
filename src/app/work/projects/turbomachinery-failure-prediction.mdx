@@ -1,0 +1,277 @@
+---
+title: "Turbomachinery Failure Prediction with 96.5% Accuracy"
+publishedAt: "2021-08-15"
+summary: "Led a team of data scientists to develop an ML model predicting turbomachinery failures with 96.5% accuracy, enabling proactive maintenance and reducing unplanned downtime."
+images:
+  - "/images/projects/turbomachinery/cover-01.jpg"
+team:
+  - name: "Keshav Mishra"
+    role: "Team Lead & ML Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/keshav98"
+---
+
+## Overview
+
+Led a team of data scientists in developing a highly accurate machine learning model for predicting turbomachinery failures. This predictive maintenance solution achieved 96.5% accuracy in identifying equipment at risk of failure, enabling proactive maintenance scheduling and significantly reducing costly unplanned downtime in industrial facilities.
+
+## Problem Statement
+
+Turbomachinery (turbines, compressors, pumps) is critical infrastructure in oil & gas, power generation, and manufacturing facilities. Unexpected equipment failures result in:
+
+- **Unplanned Downtime**: Average cost of $250,000 per day for major facilities
+- **Safety Risks**: Equipment failures can lead to dangerous situations
+- **Cascading Failures**: One failure can trigger problems in connected systems
+- **Maintenance Inefficiency**: Reactive maintenance is more expensive than planned maintenance
+- **Production Losses**: Reduced output during equipment degradation
+
+Traditional maintenance approaches were either reactive (fix after failure) or preventive (scheduled regardless of condition), both inefficient. The challenge was to predict failures with high accuracy and sufficient lead time to enable proactive maintenance.
+
+## Solution Architecture
+
+### Data Collection & Engineering
+
+**Sensor Data Integration**: Integrated data from hundreds of sensors monitoring:
+- Temperature (bearing, oil, exhaust)
+- Vibration (amplitude, frequency, patterns)
+- Pressure (inlet, outlet, differential)
+- Flow rates
+- Power consumption
+- Acoustic emissions
+- Oil quality metrics
+
+**Historical Failure Data**: Analyzed 5+ years of maintenance records, failure reports, and work orders to identify failure patterns and root causes.
+
+**Feature Engineering**: Created 200+ engineered features including:
+- Rolling statistics (mean, std, min, max) over multiple time windows
+- Rate of change indicators
+- Frequency domain features from vibration signals
+- Cross-sensor correlation features
+- Deviation from normal operating ranges
+- Time-since-last-maintenance features
+
+### Model Development
+
+**Multi-Class Classification**: Developed models to predict:
+1. Failure probability within next 7, 14, and 30 days
+2. Failure type (bearing failure, seal failure, blade damage, etc.)
+3. Failure severity (minor, moderate, critical)
+
+**Ensemble Approach**: Combined multiple algorithms for robust predictions:
+- XGBoost for handling non-linear relationships
+- Random Forest for feature importance and robustness
+- Gradient Boosting for sequential error correction
+- Neural Networks for complex pattern recognition
+
+**Time Series Considerations**: Implemented proper time-based train-test splits and walk-forward validation to prevent data leakage and ensure realistic performance estimates.
+
+## Key Features
+
+- **Early Warning System**: Predicts failures 7-30 days in advance with 96.5% accuracy
+- **Failure Type Classification**: Identifies specific failure modes for targeted maintenance
+- **Severity Assessment**: Prioritizes maintenance based on predicted failure severity
+- **Confidence Scores**: Provides prediction confidence to guide decision-making
+- **Real-Time Monitoring**: Continuous scoring of equipment health
+- **Explainable Predictions**: SHAP values explain which sensors/features drove each prediction
+- **Maintenance Scheduling Integration**: Automatically generates maintenance work orders
+- **Historical Trend Analysis**: Tracks equipment degradation over time
+
+## Technologies Used
+
+- **Python**: Core implementation language
+- **XGBoost & LightGBM**: Primary ML algorithms
+- **scikit-learn**: Model evaluation and preprocessing
+- **Pandas & NumPy**: Data manipulation and numerical computing
+- **TensorFlow**: Deep learning models for complex patterns
+- **SHAP**: Model interpretability and feature importance
+- **Apache Spark**: Distributed processing for large sensor datasets
+- **Time Series Analysis**: statsmodels, Prophet for temporal patterns
+- **MLflow**: Experiment tracking and model versioning
+- **Docker**: Containerized deployment
+
+## Implementation Details
+
+### Feature Engineering Pipeline
+
+```python
+import pandas as pd
+import numpy as np
+from scipy import signal
+
+def engineer_features(sensor_data):
+    features = pd.DataFrame()
+    
+    # Rolling statistics (multiple windows)
+    for window in [6, 12, 24, 48]:  # hours
+        features[f'temp_mean_{window}h'] = sensor_data['temperature'].rolling(window).mean()
+        features[f'temp_std_{window}h'] = sensor_data['temperature'].rolling(window).std()
+        features[f'vibration_max_{window}h'] = sensor_data['vibration'].rolling(window).max()
+    
+    # Rate of change
+    features['temp_rate_of_change'] = sensor_data['temperature'].diff()
+    features['vibration_trend'] = sensor_data['vibration'].rolling(24).apply(
+        lambda x: np.polyfit(range(len(x)), x, 1)[0]
+    )
+    
+    # Frequency domain features
+    f, psd = signal.periodogram(sensor_data['vibration'])
+    features['vibration_dominant_freq'] = f[np.argmax(psd)]
+    features['vibration_spectral_entropy'] = -np.sum(psd * np.log(psd + 1e-10))
+    
+    # Deviation from normal
+    features['temp_deviation'] = (sensor_data['temperature'] - sensor_data['temperature'].mean()) / sensor_data['temperature'].std()
+    
+    return features
+```
+
+### Model Training with Class Imbalance Handling
+
+```python
+from xgboost import XGBClassifier
+from sklearn.model_selection import TimeSeriesSplit
+from imblearn.over_sampling import SMOTE
+
+# Handle class imbalance (failures are rare)
+smote = SMOTE(sampling_strategy=0.3)
+X_resampled, y_resampled = smote.fit_resample(X_train, y_train)
+
+# Train XGBoost with custom parameters
+model = XGBClassifier(
+    max_depth=8,
+    learning_rate=0.05,
+    n_estimators=500,
+    scale_pos_weight=10,  # Weight for positive class
+    objective='binary:logistic',
+    eval_metric='auc'
+)
+
+# Time-based cross-validation
+tscv = TimeSeriesSplit(n_splits=5)
+for train_idx, val_idx in tscv.split(X_resampled):
+    X_fold_train, X_fold_val = X_resampled[train_idx], X_resampled[val_idx]
+    y_fold_train, y_fold_val = y_resampled[train_idx], y_resampled[val_idx]
+    
+    model.fit(
+        X_fold_train, y_fold_train,
+        eval_set=[(X_fold_val, y_fold_val)],
+        early_stopping_rounds=50,
+        verbose=False
+    )
+```
+
+### Real-Time Prediction System
+
+```python
+from datetime import datetime, timedelta
+
+def predict_failure_risk(equipment_id, current_sensor_data):
+    # Engineer features from recent sensor data
+    features = engineer_features(current_sensor_data)
+    
+    # Get predictions for multiple time horizons
+    predictions = {
+        '7_days': model_7d.predict_proba(features)[:, 1],
+        '14_days': model_14d.predict_proba(features)[:, 1],
+        '30_days': model_30d.predict_proba(features)[:, 1]
+    }
+    
+    # Calculate SHAP values for explainability
+    shap_values = explainer.shap_values(features)
+    
+    # Generate alert if high risk
+    if predictions['7_days'][-1] > 0.7:
+        create_maintenance_alert(
+            equipment_id=equipment_id,
+            risk_score=predictions['7_days'][-1],
+            predicted_failure_date=datetime.now() + timedelta(days=7),
+            top_contributing_factors=get_top_features(shap_values)
+        )
+    
+    return predictions, shap_values
+```
+
+## Impact & Results
+
+### Accuracy Metrics
+- **Overall Accuracy**: 96.5%
+- **Precision**: 94.2% (few false alarms)
+- **Recall**: 97.8% (catches most failures)
+- **F1-Score**: 96.0%
+- **AUC-ROC**: 0.98
+- **Lead Time**: Average 18 days advance warning
+
+### Business Impact
+- **Downtime Reduction**: 45% reduction in unplanned downtime
+- **Cost Savings**: $2.5M annually in avoided emergency repairs and lost production
+- **Maintenance Efficiency**: 30% reduction in maintenance costs through optimized scheduling
+- **Safety Improvements**: Zero catastrophic failures since deployment
+- **Equipment Lifespan**: 15% increase in average equipment lifespan
+- **ROI**: 8x return on investment within first year
+
+### Operational Benefits
+- **Proactive Planning**: Maintenance scheduled during planned outages
+- **Parts Inventory**: Optimized spare parts inventory based on predicted failures
+- **Resource Allocation**: Better planning of maintenance crew schedules
+- **Reduced Emergency Repairs**: 60% reduction in emergency maintenance calls
+
+## Challenges and Learnings
+
+**Class Imbalance**: Failures are rare events (< 2% of observations). We addressed this with SMOTE oversampling, class weights, and ensemble methods that handle imbalance well.
+
+**Sensor Noise and Failures**: Sensors themselves sometimes fail or provide noisy data. We implemented robust preprocessing with outlier detection and sensor health monitoring.
+
+**False Positives vs False Negatives**: Balancing false alarms (unnecessary maintenance) with missed failures (costly downtime). We optimized the threshold based on business costs and provided confidence scores for decision support.
+
+**Temporal Dependencies**: Equipment degradation is a time-dependent process. We used time series features, LSTM networks for sequence modeling, and proper temporal validation strategies.
+
+**Domain Expertise Integration**: Collaborated closely with maintenance engineers to validate features and predictions. Their expertise helped identify physically meaningful features and interpret model outputs.
+
+**Model Drift**: Equipment behavior changes over time due to aging and modifications. We implemented continuous monitoring and quarterly model retraining.
+
+## Feature Importance Insights
+
+Top predictive features identified:
+1. **Bearing Temperature Trend** (24-hour rate of change)
+2. **Vibration Spectral Entropy** (indicates irregular patterns)
+3. **Oil Quality Degradation Rate**
+4. **Pressure Differential Deviation**
+5. **Time Since Last Maintenance**
+6. **Power Consumption Variability**
+7. **Temperature-Vibration Correlation**
+
+These insights helped maintenance teams understand failure mechanisms and improve preventive maintenance procedures.
+
+## Deployment & Integration
+
+### Real-Time Scoring Pipeline
+- Sensor data ingested every 5 minutes
+- Features computed in real-time using Apache Spark
+- Model scoring with sub-second latency
+- Predictions stored in time-series database
+
+### Alert System
+- Multi-tier alerting based on risk levels
+- Integration with work order management system
+- Mobile notifications for critical alerts
+- Dashboard for monitoring fleet health
+
+### Continuous Improvement
+- Monthly model performance reviews
+- Quarterly retraining with new failure data
+- A/B testing of model improvements
+- Feedback loop from maintenance outcomes
+
+## Future Enhancements
+
+- **Multi-Equipment Correlation**: Predict cascading failures across connected equipment
+- **Prescriptive Maintenance**: Recommend specific maintenance actions, not just failure prediction
+- **Transfer Learning**: Apply models trained on one facility to new facilities
+- **Digital Twin Integration**: Combine physics-based models with ML predictions
+- **Remaining Useful Life**: Predict exact remaining operational hours
+- **Root Cause Analysis**: Automated diagnosis of failure root causes
+
+## Outcome
+
+The turbomachinery failure prediction system has become a cornerstone of the predictive maintenance strategy at Mechademy Engineering Solutions and its clients. By providing accurate, early warnings of equipment failures, the system has enabled a shift from reactive to proactive maintenance, resulting in significant cost savings, improved safety, and extended equipment lifespan. The success of this project has led to its expansion across multiple facilities and equipment types, establishing a new standard for industrial predictive maintenance.
+
+The project also demonstrated the value of combining domain expertise with advanced ML techniques—a lesson that has informed all subsequent ML initiatives at the organization.

@@ -1,31 +1,31 @@
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
-import React, { ReactNode } from "react";
-import { slugify as transliterate } from "transliteration";
-
 import {
-  Heading,
-  HeadingLink,
-  Text,
-  InlineCode,
-  CodeBlock,
-  TextProps,
-  MediaProps,
   Accordion,
   AccordionGroup,
-  Table,
-  Feedback,
   Button,
   Card,
-  Grid,
-  Row,
+  CodeBlock,
   Column,
+  Feedback,
+  Grid,
+  Heading,
+  HeadingLink,
   Icon,
-  Media,
-  SmartLink,
+  InlineCode,
+  Line,
   List,
   ListItem,
-  Line,
+  Media,
+  type MediaProps,
+  Row,
+  SmartLink,
+  Table,
+  Text,
+  type TextProps,
 } from "@once-ui-system/core";
+import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
+import type React from "react";
+import type { ReactNode } from "react";
+import { slugify as transliterate } from "transliteration";
 
 type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
@@ -82,7 +82,7 @@ function slugify(str: string): string {
   return transliterate(strWithAnd, {
     lowercase: true,
     separator: "-", // Replace spaces with -
-  }).replace(/\-\-+/g, "-"); // Replace multiple - with single -
+  }).replace(/--+/g, "-"); // Replace multiple - with single -
 }
 
 function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
@@ -121,10 +121,20 @@ function createInlineCode({ children }: { children: ReactNode }) {
   return <InlineCode>{children}</InlineCode>;
 }
 
-function createCodeBlock(props: any) {
+type CodeElementProps = {
+  className?: string;
+  children?: string;
+};
+
+type CodeBlockPreProps = React.HTMLAttributes<HTMLPreElement> & {
+  children?: React.ReactElement<CodeElementProps>;
+};
+
+function createCodeBlock(props: CodeBlockPreProps) {
   // For pre tags that contain code blocks
-  if (props.children && props.children.props && props.children.props.className) {
+  if (props.children?.props?.className) {
     const { className, children } = props.children.props;
+    const code = children ?? "";
 
     // Extract language from className (format: language-xxx)
     const language = className.replace("language-", "");
@@ -136,7 +146,7 @@ function createCodeBlock(props: any) {
         marginBottom="16"
         codes={[
           {
-            code: children,
+            code,
             language,
             label,
           },
@@ -170,22 +180,22 @@ function createHR() {
   );
 }
 
-const components = {
-  p: createParagraph as any,
-  h1: createHeading("h1") as any,
-  h2: createHeading("h2") as any,
-  h3: createHeading("h3") as any,
-  h4: createHeading("h4") as any,
-  h5: createHeading("h5") as any,
-  h6: createHeading("h6") as any,
-  img: createImage as any,
-  a: CustomLink as any,
-  code: createInlineCode as any,
-  pre: createCodeBlock as any,
-  ol: createList as any,
-  ul: createList as any,
-  li: createListItem as any,
-  hr: createHR as any,
+const components: MDXRemoteProps["components"] = {
+  p: createParagraph,
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+  h4: createHeading("h4"),
+  h5: createHeading("h5"),
+  h6: createHeading("h6"),
+  img: createImage,
+  a: CustomLink,
+  code: createInlineCode,
+  pre: createCodeBlock,
+  ol: createList,
+  ul: createList,
+  li: createListItem,
+  hr: createHR,
   Heading,
   Text,
   CodeBlock,
@@ -205,7 +215,7 @@ const components = {
 };
 
 type CustomMDXProps = MDXRemoteProps & {
-  components?: typeof components;
+  components?: MDXRemoteProps["components"];
 };
 
 export function CustomMDX(props: CustomMDXProps) {

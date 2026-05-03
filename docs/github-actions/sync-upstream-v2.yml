@@ -1,0 +1,131 @@
+name: Sync with Upstream Fork
+run-name: Sync upstream by @${{ github.actor }} - ${{ github.event_name }}
+
+on:
+  # Run on a schedule (daily at 2 AM UTC)
+  schedule:
+    - cron: '0 2 * * *'
+  
+  # Allow manual trigger from Actions tab
+  workflow_dispatch:
+
+# Prevent multiple sync operations from running simultaneously
+concurrency:
+  group: sync-upstream-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync main branch with upstream
+    runs-on: ubuntu-latest
+    timeout-minutes: 10  # Prevent hanging workflows
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6  # Updated to v6 for improved security
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/once-ui-system/magic-portfolio.git || true
+          git remote -v
+      
+      - name: Fetch upstream changes
+        run: |
+          git fetch upstream main
+          echo "Fetched upstream changes"
+      
+      - name: Check for updates
+        id: check
+        run: |
+          BEHIND=$(git rev-list --count HEAD..upstream/main)
+          echo "commits_behind=$BEHIND" >> $GITHUB_OUTPUT
+          echo "Main branch is $BEHIND commits behind upstream"
+          
+          if [ "$BEHIND" -gt 0 ]; then
+            echo "has_updates=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_updates=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Merge upstream changes
+        if: steps.check.outputs.has_updates == 'true'
+        run: |
+          echo "Merging upstream/main into main..."
+          # Try merge without --allow-unrelated-histories first
+          git merge upstream/main --no-edit || {
+            echo "Merge conflict detected. Creating a pull request instead."
+            exit 1
+          }
+      
+      - name: Push changes
+        if: steps.check.outputs.has_updates == 'true'
+        run: |
+          git push origin main
+          echo "Successfully synced main branch with upstream"
+      
+      - name: Create PR on conflict
+        if: failure()
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Sync with upstream fork'
+          title: '🔄 Sync main branch with upstream fork'
+          body: |
+            This PR syncs the `main` branch with the upstream repository: `once-ui-system/magic-portfolio`.
+            
+            **Merge conflicts detected** - manual review required.
+            
+            ### Changes from Upstream
+            - Review the changes from the upstream repository
+            - Resolve any conflicts
+            - Merge this PR to complete the sync
+            
+            ### What to do next
+            1. Review the changes in this PR
+            2. Resolve any merge conflicts
+            3. Merge this PR to update your main branch
+            4. Optionally merge main into develop to get upstream updates in your custom branch
+            
+            ---
+            *This PR was automatically created by the sync-upstream workflow.*
+          branch: sync-upstream-main
+          base: main
+          labels: |
+            sync
+            automated
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Upstream Sync Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.check.outputs.has_updates }}" == "true" ]; then
+            echo "✅ **Status**: Synced successfully" >> $GITHUB_STEP_SUMMARY
+            echo "📊 **Commits merged**: ${{ steps.check.outputs.commits_behind }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **Status**: Already up to date" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 **Upstream**: [once-ui-system/magic-portfolio](https://github.com/once-ui-system/magic-portfolio)" >> $GITHUB_STEP_SUMMARY
+          
+          # Also output to console
+          if [ "${{ steps.check.outputs.has_updates }}" == "true" ]; then
+            echo "✅ Sync completed: ${{ steps.check.outputs.commits_behind }} commits merged from upstream"
+          else
+            echo "✅ Already up to date with upstream"
+          fi

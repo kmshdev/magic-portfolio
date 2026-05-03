@@ -1,11 +1,11 @@
+import { Line, Row, Text } from "@once-ui-system/core";
 import type { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
-import { InlineCode, Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
   firstName: "Keshav",
   lastName: "Mishra",
-  name: `Keshav Mishra`,
-  role: "Autonomous Agent Engineer",
+  name: "Keshav Mishra",
+  role: "LLM and ML Engineer",
   avatar: "/images/avatar.jpg",
   email: "me@kmsh.dev",
   location: "Asia/Kolkata",
@@ -14,8 +14,8 @@ const person: Person = {
 
 const newsletter: Newsletter = {
   display: false,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>Technical insights on LLM engineering, autonomous agents, and MLOps</>,
+  title: <></>,
+  description: <></>,
 };
 
 const social: Social = [
@@ -43,31 +43,38 @@ const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name} (kmsh) – ${person.role}`,
-  description: `Portfolio of Keshav Mishra (kmsh), an Autonomous Agent Engineer specializing in production-grade LLM systems with 5+ years of experience delivering measurable impact across retail, finance, oil & gas, and healthcare industries.`,
-  headline: <>Autonomous Agent Engineer</>,
+  title: `${person.name}'s Portfolio`,
+  description: `Portfolio website showcasing my work as a ${person.role}`,
+  headline: <>Building autonomous agents and LLM-powered systems</>,
   featured: {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">genie-cli</strong>{" "}
+        <strong className="ml-4">Genie Platform</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
-          Featured project
+          Featured work
         </Text>
       </Row>
     ),
-    href: "https://github.com/propel-genie/genie-cli",
+    href: "/work/genie-code-generation",
   },
   subline: (
     <>
-      I'm Keshav (kmsh), an{" "}
+      I'm Keshav, an LLM and ML Engineer specializing in{" "}
       <Text as="span" size="xl" weight="strong">
-        Autonomous Agent Engineer
-      </Text>{" "}
-      specializing in production-grade LLM systems. <br />
-      Building tools that deliver{" "}
-      <InlineCode>20%+</InlineCode> efficiency improvements.
+        autonomous agents
+      </Text>
+      ,{" "}
+      <Text as="span" size="xl" weight="strong">
+        prompt engineering
+      </Text>
+      , and{" "}
+      <Text as="span" size="xl" weight="strong">
+        open-source AI tooling
+      </Text>
+      . <br />I architect production-grade LLM applications that transform complex workflows into
+      intelligent automation.
     </>
   ),
 };
@@ -76,7 +83,7 @@ const about: About = {
   path: "/about",
   label: "About",
   title: `About – ${person.name}`,
-  description: `Meet ${person.name} (kmsh), ${person.role} with 5+ years of experience in LLM engineering, autonomous agents, and MLOps`,
+  description: `Meet ${person.name}, ${person.role}`,
   tableOfContent: {
     display: true,
     subItems: true,
@@ -86,18 +93,18 @@ const about: About = {
   },
   calendar: {
     display: false,
-    link: "https://cal.com",
+    link: "",
   },
   intro: {
     display: true,
     title: "Introduction",
     description: (
       <>
-        Keshav Mishra (kmsh) is an LLM and ML Engineer with 5+ years of experience building
-        autonomous agents and production-grade ML systems. Currently working at Valory on
-        next-generation autonomous agent platforms. His work spans multiple industries including
-        retail, finance, oil & gas, and healthcare, delivering measurable impact through innovative
-        LLM solutions.
+        Innovative LLM and ML Engineer with 5+ years of experience across retail, finance, oil &
+        gas, and health/insurance NLP. Specialized in building autonomous agents, large language
+        model applications, and open-source AI tooling. Seeking full-time roles focused on
+        generative AI, LLM product engineering, and next-generation NLP systems in dynamic,
+        impact-driven teams.
       </>
     ),
   },
@@ -107,42 +114,150 @@ const about: About = {
     experiences: [
       {
         company: "Valory",
-        timeframe: "2024 - Present",
-        role: "LLM Engineer",
+        timeframe: "April 2024 - July 2025",
+        role: "Lead LLM Engineer, Autonomous Agent Platforms",
         achievements: [
-          <>
-            Built autonomous agent frameworks for the Olas ecosystem, enabling rapid prototyping and
-            deployment of production-grade agents.
-          </>,
-          <>
-            Developed <strong>genie-cli</strong>, an LLM-powered agent scaffolding platform published
-            on PyPI, streamlining agent development workflows.
-          </>,
-          <>
-            Contributed to <strong>agents-fun-eliza</strong> and <strong>trader</strong> projects,
-            advancing autonomous conversational agents and AI prediction market systems.
-          </>,
+          {
+            id: "valory-genie-platform",
+            content: (
+              <>
+                Conceived, architected, and implemented <strong>Genie</strong>, Valory's flagship
+                LLM-driven code generation and agent scaffolding platform—an industry-first system
+                enabling autonomous agent and service creation from natural language.
+              </>
+            ),
+          },
+          {
+            id: "valory-prototyping-collapsed",
+            content: (
+              <>
+                Directly reduced agent/service prototyping time from weeks to minutes, democratizing
+                autonomous agent development for both technical and non-technical users.
+              </>
+            ),
+          },
+          {
+            id: "valory-agents-fun-eliza",
+            content: (
+              <>
+                Architected and developed <strong>agents-fun-eliza</strong>, an autonomous agent for
+                the Agents.fun ecosystem, leveraging the Eliza framework to deliver fully
+                open-sourced, interactive, and extensible conversational agents.
+              </>
+            ),
+          },
+          {
+            id: "valory-plugin-memeooorr",
+            content: (
+              <>
+                Published and maintained <strong>plugin-memeooorr</strong>—a TypeScript-based
+                open-source package, released on npm, enabling meme-centric agent extensions and
+                community creativity.
+              </>
+            ),
+          },
+          {
+            id: "valory-prompt-pipelines",
+            content: (
+              <>
+                Engineered robust LLM prompt engineering pipelines, enabling semantic-to-formal
+                translation for agent behaviors and FSMs, with feedback loops and error handling for
+                high-reliability code generation.
+              </>
+            ),
+          },
+          {
+            id: "valory-agent-mlops",
+            content: (
+              <>
+                Enhanced agent orchestration and deployment pipelines using containerization
+                (Docker/Kubernetes), CI/CD, MLflow, and best MLOps practices—delivering
+                reproducible, secure, and scalable agent workflows.
+              </>
+            ),
+          },
         ],
         images: [],
       },
       {
-        company: "Mechatomy Engineering Solutions / Vimele / Zurich",
-        timeframe: "2020 - 2024",
+        company: "Mechademy Engineering Solutions",
+        timeframe: "Feb 2020 - March 2024",
         role: "LLM and MLOps Engineer",
         achievements: [
-          <>
-            Delivered <strong>Text2SQL2Plot LLM Agent</strong> for turbomachinery analytics,
-            achieving a <strong>20% reduction in repair time</strong> through natural language
-            analytics.
-          </>,
-          <>
-            Built RAG-powered retrieval agents for on-field maintenance, improving operational
-            efficiency across oil & gas operations.
-          </>,
-          <>
-            Implemented end-to-end MLOps pipelines across retail, finance, and healthcare sectors,
-            ensuring production-grade reliability and scalability.
-          </>,
+          {
+            id: "mech-rag-field-agent",
+            content: (
+              <>
+                Developed a <strong>RAG Agent</strong> for on-field agents to access and retrieve
+                maintenance logs, servicing records, and critical equipment data on-demand.
+              </>
+            ),
+          },
+          {
+            id: "mech-text2sql2plot",
+            content: (
+              <>
+                Developed a <strong>Text2SQL2Plot LLM agent</strong> for field workers in
+                turbomachinery plants using Vanna.ai and GPT-4o-mini, reducing repair time by 20%.
+              </>
+            ),
+          },
+          {
+            id: "mech-automl-pipeline",
+            content: (
+              <>
+                Fabricated end-to-end <strong>AutoML</strong> that auto tracks, hypertunes, deploys
+                models saving 100+ hrs monthly work.
+              </>
+            ),
+          },
+          {
+            id: "mech-role-assistant",
+            content: (
+              <>
+                Built a <strong>LLM Role Assistant</strong> tool based on internal alerts data with
+                LangChain & GPT-4 saving 200+ man hours monthly, which performs work equal to 4 team
+                members of alert management team.
+              </>
+            ),
+          },
+          {
+            id: "mech-oil-gas-chatbot",
+            content: (
+              <>
+                Pioneered a <strong>RAG based LLM chatbot</strong> using GPT-4 and LlamaIndex, that
+                allows user to interact with bot that has access to latest developments in Energy,
+                Oil and Gas fields, that is directly client facing for big Oil and Gas Clients.
+              </>
+            ),
+          },
+          {
+            id: "mech-mlops-platform",
+            content: (
+              <>
+                Built an in-house <strong>MLOps platform</strong> utilizing drift detection, MLflow,
+                automated model training, that reduced modeling related workload by 70%.
+              </>
+            ),
+          },
+          {
+            id: "mech-mistral-finetune",
+            content: (
+              <>
+                Trained <strong>Mistral 7B model</strong> using on-premise data of alerts utilizing
+                a distributed framework that can scale to large datasets.
+              </>
+            ),
+          },
+          {
+            id: "mech-failure-prediction",
+            content: (
+              <>
+                Led a team of data scientists in developing a ML model that predicted the failure of
+                turbomachinery with <strong>96.5% accuracy</strong>.
+              </>
+            ),
+          },
         ],
         images: [],
       },
@@ -153,16 +268,13 @@ const about: About = {
     title: "Education",
     institutions: [
       {
-        name: "Guru Gobind Singh Indraprastha University",
-        description: <>B.E. Computer Science, GPA 8.1</>,
-      },
-      {
-        name: "Udacity",
-        description: <>Deep Learning Nanodegree</>,
-      },
-      {
-        name: "Coursera",
-        description: <>Introduction to TensorFlow for AI, ML, and Deep Learning</>,
+        name: "GGSIPU",
+        description: (
+          <>
+            B.E. Computer Science (2016 - 2020) • GPA: 8.1 • Winner at Smart India Hackathon 2018,
+            AICTE
+          </>
+        ),
       },
     ],
   },
@@ -171,32 +283,19 @@ const about: About = {
     title: "Technical Skills",
     skills: [
       {
-        title: "Languages & Core",
+        title: "LLM Engineering",
         description: (
           <>
-            Proficient in <strong>Python</strong>, <strong>TypeScript</strong>, <strong>Rust</strong>
-            , and <strong>SQL</strong> for building production systems.
+            Expert in prompt engineering, RAG (Retrieval-Augmented Generation), agent orchestration,
+            and semantic-to-formal translation for autonomous systems.
           </>
         ),
         tags: [
-          { name: "Python", icon: "python" },
-          { name: "TypeScript", icon: "typescript" },
-          { name: "Rust", icon: "rust" },
-        ],
-        images: [],
-      },
-      {
-        title: "LLM & AI Frameworks",
-        description: (
-          <>
-            Expert in <strong>LangChain</strong>, <strong>DSPy</strong>, <strong>MLflow</strong>,{" "}
-            <strong>HuggingFace</strong>, <strong>llama.cpp</strong>, <strong>Haystack</strong>, and{" "}
-            <strong>Weaviate</strong> for building autonomous agent systems.
-          </>
-        ),
-        tags: [
-          { name: "LangChain", icon: "langchain" },
-          { name: "HuggingFace", icon: "huggingface" },
+          { name: "LangChain", icon: "" },
+          { name: "DSPy", icon: "" },
+          { name: "LlamaIndex", icon: "" },
+          { name: "Langflow", icon: "" },
+          { name: "HuggingFace", icon: "" },
         ],
         images: [],
       },
@@ -204,15 +303,48 @@ const about: About = {
         title: "MLOps & Infrastructure",
         description: (
           <>
-            Experienced with <strong>AWS</strong>, <strong>Docker</strong>,{" "}
-            <strong>Kubernetes</strong>, <strong>FastAPI</strong>, <strong>Ray</strong>,{" "}
-            <strong>MongoDB</strong>, and <strong>Redis</strong> for scalable ML deployments.
+            Building production-grade ML systems with CI/CD, drift detection, AutoML, and
+            containerized deployment at scale.
           </>
         ),
         tags: [
-          { name: "AWS", icon: "aws" },
-          { name: "Docker", icon: "docker" },
-          { name: "Kubernetes", icon: "kubernetes" },
+          { name: "MLflow", icon: "" },
+          { name: "Docker", icon: "" },
+          { name: "Kubernetes", icon: "" },
+          { name: "DevOps", icon: "" },
+        ],
+        images: [],
+      },
+      {
+        title: "Programming & Cloud",
+        description: (
+          <>
+            Full-stack AI development in Python, TypeScript, and Rust, with expertise in AWS, SQL,
+            MongoDB, and Redis.
+          </>
+        ),
+        tags: [
+          { name: "Python", icon: "python" },
+          { name: "TypeScript", icon: "typescript" },
+          { name: "Rust", icon: "" },
+          { name: "AWS", icon: "" },
+          { name: "SQL", icon: "" },
+        ],
+        images: [],
+      },
+      {
+        title: "Data Science & ML",
+        description: (
+          <>
+            Advanced expertise in NLP, time series analysis, statistics, and machine learning
+            frameworks like XGBoost and scikit-learn.
+          </>
+        ),
+        tags: [
+          { name: "NLP", icon: "" },
+          { name: "XGBoost", icon: "" },
+          { name: "Statistics", icon: "" },
+          { name: "Time Series", icon: "" },
         ],
         images: [],
       },
@@ -223,22 +355,22 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Technical Blog",
-  description: `Insights on LLM engineering, autonomous agents, and MLOps from ${person.name}`,
+  title: "Writing about AI and engineering...",
+  description: `Read what ${person.name} has been up to recently`,
 };
 
 const work: Work = {
   path: "/work",
-  label: "Projects",
+  label: "Work",
   title: `Projects – ${person.name}`,
-  description: `Autonomous agents, developer tools, and enterprise ML solutions by ${person.name} (kmsh)`,
+  description: `LLM and ML projects by ${person.name}`,
 };
 
 const gallery: Gallery = {
   path: "/gallery",
   label: "Gallery",
-  title: `Case Studies – ${person.name}`,
-  description: `Detailed case studies of projects delivering measurable impact`,
+  title: "Gallery",
+  description: "Photo gallery",
   images: [],
 };
 

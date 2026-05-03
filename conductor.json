@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "setup": "./conductor-setup.sh",
+    "run": "npm run dev -- --port $CONDUCTOR_PORT",
+    "archive": "./conductor-archive.sh"
+  },
+  "runScriptMode": "concurrent"
+}

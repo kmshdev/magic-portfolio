@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateUrlForSSRF } from "../utils";
 
-export const runtime = "edge";
-
 function decodeHTMLEntities(text: string): string {
   return text.replace(/&(#?[a-zA-Z0-9]+);/g, (match, entity) => {
     const entities: { [key: string]: string } = {
@@ -21,7 +19,7 @@ function decodeHTMLEntities(text: string): string {
       const code = entity.startsWith("#x")
         ? parseInt(entity.slice(2), 16)
         : parseInt(entity.slice(1), 10);
-      if (isNaN(code)) {
+      if (Number.isNaN(code)) {
         return match;
       }
       return String.fromCharCode(code);
@@ -108,6 +106,7 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         error: "Failed to fetch metadata",
+        message: error instanceof Error ? error.message : "Unknown error occurred",
       },
       { status: 500 },
     );
