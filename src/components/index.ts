@@ -1,4 +1,5 @@
 export { Footer } from "@/components/Footer";
+export { GitAuraDashboardHero } from "@/components/gitaura";
 export { Header } from "@/components/Header";
 export { HeadingLink } from "@/components/HeadingLink";
 export { Mailchimp } from "@/components/Mailchimp";

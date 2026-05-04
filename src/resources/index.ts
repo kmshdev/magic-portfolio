@@ -9,7 +9,8 @@ export {
   social,
   work,
 } from "./content";
-
+export type { GitAuraMonth, GitAuraRepo } from "./githubAura";
+export { githubAura } from "./githubAura";
 export {
   baseURL,
   dataStyle,

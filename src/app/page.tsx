@@ -11,7 +11,7 @@ import {
   Schema,
   Text,
 } from "@once-ui-system/core";
-import { Mailchimp } from "@/components";
+import { GitAuraDashboardHero, Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Projects } from "@/components/work/Projects";
 import { about, baseURL, home, person, routes } from "@/resources";
@@ -103,6 +103,7 @@ export default function Home() {
       <RevealFx translateY="16" delay={0.6}>
         <Projects range={[1, 1]} />
       </RevealFx>
+      <GitAuraDashboardHero />
       {routes["/blog"] && (
         <Column fillWidth gap="24" marginBottom="l">
           <Row fillWidth paddingRight="64">
