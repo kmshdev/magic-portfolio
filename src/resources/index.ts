@@ -9,7 +9,8 @@ export {
   social,
   work,
 } from "./content";
-
+export type { GitAuraMonth, GitAuraRepo } from "./githubAura";
+export { githubAura } from "./githubAura";
 export {
   baseURL,
   dataStyle,
@@ -24,3 +25,13 @@ export {
   socialSharing,
   style,
 } from "./once-ui.config";
+export type {
+  EvidenceConfidence,
+  EvidenceReceipt,
+  EvidenceSource,
+  EvidenceSourceType,
+  ProjectEvidence,
+} from "./projectEvidence";
+export { getProjectEvidence } from "./projectEvidence";
+export type { ProjectSlug, ProjectVisual } from "./projectVisuals";
+export { getProjectVisual, projectVisuals } from "./projectVisuals";

@@ -62,9 +62,10 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
     <Column
       overflow="hidden"
       fillWidth
-      padding="xl"
-      radius="l"
+      padding="32"
+      radius="xl"
       marginBottom="m"
+      gap="24"
       horizontal="center"
       align="center"
       background="surface"
@@ -113,11 +114,11 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
           color: mailchimp.effects.lines.color,
         }}
       />
-      <Column maxWidth="xs" horizontal="center">
-        <Heading marginBottom="s" variant="display-strong-xs">
+      <Column maxWidth="s" gap="8" horizontal="center" align="center">
+        <Heading variant="heading-strong-xl" wrap="balance">
           {newsletter.title}
         </Heading>
-        <Text wrap="balance" marginBottom="l" variant="body-default-l" onBackground="neutral-weak">
+        <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">
           {newsletter.description}
         </Text>
       </Column>
@@ -135,7 +136,7 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
         <Row
           id="mc_embed_signup_scroll"
           fillWidth
-          maxWidth={24}
+          maxWidth={32}
           s={{ direction: "column" }}
           gap="8"
         >

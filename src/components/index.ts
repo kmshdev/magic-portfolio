@@ -1,10 +1,12 @@
 export { Footer } from "@/components/Footer";
+export { GitAuraDashboardHero } from "@/components/gitaura";
 export { Header } from "@/components/Header";
 export { HeadingLink } from "@/components/HeadingLink";
 export { Mailchimp } from "@/components/Mailchimp";
 export { CustomMDX } from "@/components/mdx";
 export { ProjectCard } from "@/components/ProjectCard";
 export { Providers } from "@/components/Providers";
+export { ProjectDashboardPreview } from "@/components/project-dashboard";
 export { RouteGuard } from "@/components/RouteGuard";
 export { ScrollToHash } from "@/components/ScrollToHash";
 export { ThemeToggle } from "@/components/ThemeToggle";
