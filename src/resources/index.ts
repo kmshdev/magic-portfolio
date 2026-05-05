@@ -25,3 +25,13 @@ export {
   socialSharing,
   style,
 } from "./once-ui.config";
+export type {
+  EvidenceConfidence,
+  EvidenceReceipt,
+  EvidenceSource,
+  EvidenceSourceType,
+  ProjectEvidence,
+} from "./projectEvidence";
+export { getProjectEvidence } from "./projectEvidence";
+export type { ProjectSlug, ProjectVisual } from "./projectVisuals";
+export { getProjectVisual, projectVisuals } from "./projectVisuals";

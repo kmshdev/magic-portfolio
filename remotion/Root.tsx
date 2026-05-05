@@ -1,6 +1,8 @@
 import { Composition, Folder } from "remotion";
+import { getProjectEvidence } from "../src/resources/projectEvidence";
 import { projectVisuals } from "../src/resources/projectVisuals";
 import { GitAuraHero } from "./GitAuraHero";
+import { ProjectDashboardWalkthrough } from "./ProjectDashboardWalkthrough";
 import { ProjectWalkthrough } from "./ProjectWalkthrough";
 
 const fps = 30;
@@ -30,6 +32,20 @@ export function PortfolioWalkthroughRoot() {
             width={width}
             height={height}
             defaultProps={{ project }}
+          />
+        ))}
+      </Folder>
+      <Folder name="Project-Dashboard-Walkthroughs">
+        {projectVisuals.map((project) => (
+          <Composition
+            key={`${project.slug}-dashboard`}
+            id={`${project.compositionId}-dashboard`}
+            component={ProjectDashboardWalkthrough}
+            durationInFrames={durationInFrames}
+            fps={fps}
+            width={width}
+            height={height}
+            defaultProps={{ evidence: getProjectEvidence(project.slug), project }}
           />
         ))}
       </Folder>

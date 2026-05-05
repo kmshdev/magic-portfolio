@@ -211,3 +211,15 @@ export const projectVisuals = [
     accent: "#ef6f6c",
   },
 ] as const satisfies readonly ProjectVisual[];
+
+type ProjectVisualEntry = (typeof projectVisuals)[number];
+
+export type ProjectSlug = ProjectVisualEntry["slug"];
+
+const projectVisualBySlug = new Map<string, ProjectVisualEntry>(
+  projectVisuals.map((project) => [project.slug, project]),
+);
+
+export function getProjectVisual(slug: string): ProjectVisualEntry | undefined {
+  return projectVisualBySlug.get(slug);
+}
