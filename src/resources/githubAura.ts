@@ -17,11 +17,11 @@ export type GitAuraRepo = {
 
 export const githubAura = {
   sourceUrl: "https://github.com/kmshdev",
-  snapshotLabel: "GitHub snapshot: May 4, 2026",
+  snapshotLabel: "GitHub snapshot: May 5, 2026",
   profile: {
     login: "kmshdev",
     name: "Keshav",
-    bio: "LLM and ML engineer shipping agentic systems, MLOps, and native tooling.",
+    bio: "Agent platform engineer shipping codegen tools, LLM systems, and native tooling.",
     followers: 22,
     following: 11,
     publicRepos: 59,
@@ -41,7 +41,7 @@ export const githubAura = {
   },
   aura: {
     score: 54140,
-    label: "Code Deity",
+    label: "Active builder",
     monthlyScore: 780,
     consistency: 57,
     commitShare: 93,

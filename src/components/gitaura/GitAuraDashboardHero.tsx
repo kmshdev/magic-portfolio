@@ -395,8 +395,8 @@ export function GitAuraDashboardHero() {
               <Animation
                 triggerType="hover"
                 fade={0}
-                scale={0.96}
-                duration={220}
+                scale={0.99}
+                duration={140}
                 placement="bottom-end"
                 portal
                 trigger={

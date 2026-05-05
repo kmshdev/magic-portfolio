@@ -336,8 +336,8 @@ const projectEvidence = [
     snapshotLabel: caseStudySnapshot,
     confidence: {
       score: 62,
-      label: "Case study only",
-      detail: "Repo links in the case study are not resolvable through gh.",
+      label: "Product case study",
+      detail: "Live demo and case-study evidence, kept below stronger production systems.",
     },
     primarySource: {
       type: "case-study",
@@ -362,8 +362,8 @@ const projectEvidence = [
     receipts: [
       {
         label: "Product surface",
-        value: "GitHub analytics",
-        detail: "Contribution graphs, aura points, badges, and leaderboards.",
+        value: "Developer analytics",
+        detail: "Contribution graphs, profile scoring, badges, and leaderboards.",
         source: caseStudySnapshot,
         confidence: "medium",
       },
@@ -376,16 +376,16 @@ const projectEvidence = [
         confidence: "context",
       },
       {
-        label: "Repo status",
-        value: "Unresolved",
-        detail: "The referenced GitHub repo was not resolvable via gh.",
+        label: "Portfolio role",
+        value: "Side project",
+        detail: "Useful developer-tooling signal, not the lead recruiter proof object.",
         source: githubSnapshot,
         confidence: "context",
       },
     ],
     proofNotes: [
-      "Dashboard should not pretend GitAura has a verified repo snapshot.",
-      "Evidence is still useful as a product case study and live demo reference.",
+      "Useful as developer-product signal, but intentionally lower priority than Genie.",
+      "Live demo and case-study context make the work inspectable without overclaiming repo proof.",
     ],
   },
   {

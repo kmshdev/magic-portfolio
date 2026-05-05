@@ -5,9 +5,10 @@ import { getPosts } from "@/utils/utils";
 interface ProjectsProps {
   range?: [number, number?];
   exclude?: string[];
+  order?: string[];
 }
 
-export function Projects({ range, exclude }: ProjectsProps) {
+export function Projects({ range, exclude, order }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
 
   // Exclude by slug (exact match)
@@ -19,9 +20,19 @@ export function Projects({ range, exclude }: ProjectsProps) {
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 
-  const displayedProjects = range
-    ? sortedProjects.slice(range[0] - 1, range[1] ?? sortedProjects.length)
+  const orderedSlugs = new Set(order);
+  const orderedProjects = order
+    ? order
+        .map((slug) => sortedProjects.find((project) => project.slug === slug))
+        .filter((project) => project !== undefined)
+    : [];
+  const orderedProjectList = order
+    ? [...orderedProjects, ...sortedProjects.filter((project) => !orderedSlugs.has(project.slug))]
     : sortedProjects;
+
+  const displayedProjects = range
+    ? orderedProjectList.slice(range[0] - 1, range[1] ?? orderedProjectList.length)
+    : orderedProjectList;
 
   return (
     <Column fillWidth gap="xl" marginBottom="40" paddingX="l">

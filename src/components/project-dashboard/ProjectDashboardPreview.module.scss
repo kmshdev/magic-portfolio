@@ -1,0 +1,27 @@
+.dashboard {
+  transition:
+    border-color var(--transition-micro-medium),
+    background var(--transition-micro-medium),
+    box-shadow var(--transition-micro-medium);
+}
+
+.dashboard:hover {
+  border-color: var(--neutral-alpha-strong);
+}
+
+.panel {
+  transition:
+    border-color var(--transition-micro-medium),
+    background var(--transition-micro-medium);
+}
+
+.panel:hover {
+  border-color: var(--neutral-alpha-medium);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard,
+  .panel {
+    transition: none;
+  }
+}

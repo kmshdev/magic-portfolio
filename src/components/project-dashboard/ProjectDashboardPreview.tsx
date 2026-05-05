@@ -19,6 +19,7 @@ import type {
   ProjectEvidence,
   ProjectVisual,
 } from "@/resources";
+import styles from "./ProjectDashboardPreview.module.scss";
 
 type ProjectDashboardPreviewProps = {
   project: ProjectVisual;
@@ -60,6 +61,7 @@ function DashboardCard({
 }) {
   return (
     <Column
+      className={styles.panel}
       fillWidth
       fillHeight={fillHeight}
       padding="16"
@@ -472,11 +474,12 @@ export function ProjectDashboardPreview({
   return (
     <Column
       fillWidth
-      radius="xl"
+      className={styles.dashboard}
+      radius="l"
       border="neutral-alpha-medium"
       background="surface"
       overflow="hidden"
-      shadow="m"
+      shadow="s"
     >
       <Column fillWidth padding="20" gap="20">
         <PreviewHeader
@@ -507,7 +510,7 @@ export function ProjectDashboardPreview({
           </Column>
         </Row>
 
-        <Grid columns="3" s={{ columns: 1 }} gap="12" fillWidth>
+        <Grid columns="3" l={{ columns: "2" }} s={{ columns: "1" }} gap="12" fillWidth>
           <ReceiptLedger evidence={evidence} />
           <WorkflowStack project={project} />
           <ArchitectureStack project={project} />

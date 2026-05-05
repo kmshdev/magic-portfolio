@@ -328,19 +328,19 @@ function ActiveWork() {
 
 export function GitAuraProjectPreview() {
   return (
-    <TiltFx reducedMotion="auto" intensity={0.35}>
+    <TiltFx reducedMotion="auto" intensity={0.12}>
       <HoloFx
         fillWidth
         radius="xl"
         border="neutral-alpha-medium"
         background="page"
         overflow="hidden"
-        shine={{ opacity: 14, blending: "screen" }}
-        burn={{ opacity: 10, blending: "screen" }}
-        texture={{ opacity: 5 }}
+        shine={{ opacity: 6, blending: "screen" }}
+        burn={{ opacity: 4, blending: "screen" }}
+        texture={{ opacity: 3 }}
         reducedMotion="auto"
         minHeight={42}
-        shadow="l"
+        shadow="s"
       >
         <Column fillWidth position="relative" padding="24" gap="16">
           <MatrixFx
