@@ -14,8 +14,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CustomMDX, ScrollToHash } from "@/components";
 import { Projects } from "@/components/work/Projects";
-import { about, baseURL, home, person, work } from "@/resources";
+import { about, baseURL, person, work } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
+import { ogImage } from "@/utils/og";
 import { getPosts } from "@/utils/utils";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
@@ -40,11 +41,17 @@ export async function generateMetadata({
 
   if (!post) return {};
 
+  const image = ogImage({
+    title: post.metadata.title,
+    description: post.metadata.summary,
+    label: "Selected work",
+  });
+
   return Meta.generate({
     title: post.metadata.title,
     description: post.metadata.summary,
     baseURL: baseURL,
-    image: post.metadata.image || home.image,
+    image: post.metadata.image || image,
     path: `${work.path}/${post.slug}`,
   });
 }
@@ -65,6 +72,12 @@ export default async function Project({
     notFound();
   }
 
+  const image = ogImage({
+    title: post.metadata.title,
+    description: post.metadata.summary,
+    label: "Selected work",
+  });
+
   const avatars =
     post.metadata.team?.map((person) => ({
       src: person.avatar,
@@ -80,7 +93,7 @@ export default async function Project({
         description={post.metadata.summary}
         datePublished={post.metadata.publishedAt}
         dateModified={post.metadata.publishedAt}
-        image={post.metadata.image || home.image}
+        image={post.metadata.image || image}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,

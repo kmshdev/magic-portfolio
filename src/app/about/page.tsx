@@ -15,14 +15,21 @@ import {
 import React from "react";
 import styles from "@/components/about/about.module.scss";
 import TableOfContents from "@/components/about/TableOfContents";
-import { about, baseURL, home, person, social } from "@/resources";
+import { about, baseURL, person, social } from "@/resources";
+import { ogImage } from "@/utils/og";
+
+const aboutOgImage = ogImage({
+  title: about.title,
+  description: about.description,
+  label: person.role,
+});
 
 export async function generateMetadata() {
   return Meta.generate({
     title: about.title,
     description: about.description,
     baseURL: baseURL,
-    image: home.image,
+    image: aboutOgImage,
     path: about.path,
   });
 }
@@ -58,7 +65,7 @@ export default function About() {
         title={about.title}
         description={about.description}
         path={about.path}
-        image={home.image}
+        image={aboutOgImage}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,

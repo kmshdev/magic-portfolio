@@ -1,13 +1,20 @@
 import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
 import { Projects } from "@/components/work/Projects";
 import { about, baseURL, home, person, work } from "@/resources";
+import { ogImage } from "@/utils/og";
+
+const workOgImage = ogImage({
+  title: work.title,
+  description: work.description,
+  label: "Selected work",
+});
 
 export async function generateMetadata() {
   return Meta.generate({
     title: work.title,
     description: work.description,
     baseURL: baseURL,
-    image: home.image,
+    image: workOgImage,
     path: work.path,
   });
 }
@@ -21,7 +28,7 @@ export default function Work() {
         path={work.path}
         title={work.title}
         description={work.description}
-        image={home.image}
+        image={workOgImage}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
@@ -31,7 +38,7 @@ export default function Work() {
       <Heading marginBottom="l" variant="heading-strong-xl" align="center">
         {work.title}
       </Heading>
-      <Projects />
+      <Projects order={home.featuredProjectSlugs} />
     </Column>
   );
 }

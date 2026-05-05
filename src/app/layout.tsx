@@ -14,6 +14,7 @@ import {
 import classNames from "classnames";
 import { Footer, Header, Providers, RouteGuard } from "@/components";
 import { baseURL, dataStyle, effects, fonts, home, style } from "@/resources";
+import { ogImage } from "@/utils/og";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -21,7 +22,11 @@ export async function generateMetadata() {
     description: home.description,
     baseURL: baseURL,
     path: home.path,
-    image: home.image,
+    image: ogImage({
+      title: "Agent platforms, codegen tools, and production LLM systems",
+      description: home.description,
+      label: "Agent Platform Engineer",
+    }),
   });
 }
 
