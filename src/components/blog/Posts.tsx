@@ -1,4 +1,5 @@
 import { Grid } from "@once-ui-system/core";
+import type React from "react";
 import { getPosts } from "@/utils/utils";
 import Post from "./Post";
 
@@ -8,6 +9,7 @@ interface PostsProps {
   thumbnail?: boolean;
   direction?: "row" | "column";
   exclude?: string[];
+  marginBottom?: React.ComponentProps<typeof Grid>["marginBottom"];
 }
 
 export function Posts({
@@ -16,6 +18,7 @@ export function Posts({
   thumbnail = false,
   exclude = [],
   direction,
+  marginBottom = "40",
 }: PostsProps) {
   let allBlogs = getPosts(["src", "app", "blog", "posts"]);
 
@@ -35,7 +38,7 @@ export function Posts({
   return (
     <>
       {displayedBlogs.length > 0 && (
-        <Grid columns={columns} s={{ columns: 1 }} fillWidth marginBottom="40" gap="16">
+        <Grid columns={columns} s={{ columns: 1 }} fillWidth marginBottom={marginBottom} gap="16">
           {displayedBlogs.map((post) => (
             <Post key={post.slug} post={post} thumbnail={thumbnail} direction={direction} />
           ))}

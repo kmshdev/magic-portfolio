@@ -3,8 +3,8 @@ import {
   Badge,
   Button,
   Column,
+  Grid,
   Heading,
-  Line,
   Meta,
   RevealFx,
   Row,
@@ -28,7 +28,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
+    <Column maxWidth="m" gap="40" paddingY="12" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -42,7 +42,7 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column fillWidth horizontal="center" gap="m">
+      <Column as="section" fillWidth horizontal="center" gap="m" paddingTop="24">
         <Column maxWidth="s" horizontal="center" align="center">
           {home.featured.display && (
             <RevealFx
@@ -100,28 +100,42 @@ export default function Home() {
           </RevealFx>
         </Column>
       </Column>
-      <RevealFx translateY="16" delay={0.6}>
+      <RevealFx translateY="16" delay={0.6} fillWidth>
         <Projects range={[1, 1]} />
       </RevealFx>
       <GitAuraDashboardHero />
       {routes["/blog"] && (
-        <Column fillWidth gap="24" marginBottom="l">
-          <Row fillWidth paddingRight="64">
-            <Line maxWidth={48} />
-          </Row>
-          <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
-            <Row flex={1} paddingLeft="l" paddingTop="24">
-              <Heading as="h2" variant="display-strong-xs" wrap="balance">
+        <Column as="section" fillWidth gap="20" paddingX="l" marginBottom="24">
+          <Row
+            fillWidth
+            horizontal="between"
+            vertical="end"
+            gap="16"
+            s={{ direction: "column", vertical: "start" }}
+          >
+            <Column maxWidth={28} gap="8">
+              <Text variant="label-default-s" onBackground="neutral-weak">
+                Writing
+              </Text>
+              <Heading as="h2" variant="heading-strong-xl" wrap="balance">
                 Latest from the blog
               </Heading>
-            </Row>
-            <Row flex={3} paddingX="20">
-              <Posts range={[1, 2]} columns="2" />
-            </Row>
+            </Column>
+            <Button
+              href="/blog"
+              size="m"
+              variant="secondary"
+              weight="default"
+              suffixIcon="arrowRight"
+            >
+              View all posts
+            </Button>
           </Row>
-          <Row fillWidth paddingLeft="64" horizontal="end">
-            <Line maxWidth={48} />
-          </Row>
+          <Grid columns="1" fillWidth>
+            <Column fillWidth>
+              <Posts range={[1, 2]} columns="2" marginBottom="0" thumbnail direction="column" />
+            </Column>
+          </Grid>
         </Column>
       )}
       <Projects range={[2]} />

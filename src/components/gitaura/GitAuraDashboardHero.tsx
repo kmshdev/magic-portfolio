@@ -4,12 +4,9 @@ import {
   Animation,
   Badge,
   Button,
-  Card,
   Column,
-  FlipFx,
   Grid,
   Heading,
-  HoloFx,
   Icon,
   LinearGauge,
   MatrixFx,
@@ -18,30 +15,9 @@ import {
   Row,
   SmartLink,
   Text,
-  TiltFx,
 } from "@once-ui-system/core";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import type React from "react";
 import { githubAura } from "@/resources";
-
-const MotionColumn = motion.create(Column);
-
-const motionEase = [0.16, 1, 0.3, 1] as const;
-
-const appear: Variants = {
-  hidden: ({ reduceMotion }: { reduceMotion: boolean }) => ({
-    opacity: 0,
-    y: reduceMotion ? 0 : 24,
-  }),
-  visible: ({ delay, reduceMotion }: { delay: number; reduceMotion: boolean }) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: reduceMotion ? 0 : delay,
-      duration: reduceMotion ? 0.01 : 0.55,
-      ease: motionEase,
-    },
-  }),
-};
 
 const formatCompact = (value: number) => {
   if (value >= 1000) {
@@ -50,6 +26,39 @@ const formatCompact = (value: number) => {
 
   return value.toLocaleString("en-US");
 };
+
+function BentoPanel({
+  children,
+  fillHeight = false,
+  padding = "20",
+  radius = "l",
+  border = "neutral-alpha-medium",
+  background = "surface",
+  shadow,
+}: {
+  children: React.ReactNode;
+  fillHeight?: boolean;
+  padding?: React.ComponentProps<typeof Column>["padding"];
+  radius?: React.ComponentProps<typeof Column>["radius"];
+  border?: React.ComponentProps<typeof Column>["border"];
+  background?: React.ComponentProps<typeof Column>["background"];
+  shadow?: React.ComponentProps<typeof Column>["shadow"];
+}) {
+  return (
+    <Column
+      fillWidth
+      fillHeight={fillHeight}
+      padding={padding}
+      radius={radius}
+      border={border}
+      background={background}
+      shadow={shadow}
+      style={{ alignSelf: fillHeight ? "stretch" : "start" }}
+    >
+      {children}
+    </Column>
+  );
+}
 
 function MetricTile({
   label,
@@ -63,7 +72,7 @@ function MetricTile({
   icon: string;
 }) {
   return (
-    <Card fillWidth padding="20" radius="l" border="neutral-alpha-medium" background="surface">
+    <BentoPanel fillHeight>
       <Column gap="12">
         <Row fillWidth horizontal="between" vertical="center">
           <Text variant="label-default-s" onBackground="neutral-weak">
@@ -78,7 +87,7 @@ function MetricTile({
           {detail}
         </Text>
       </Column>
-    </Card>
+    </BentoPanel>
   );
 }
 
@@ -122,51 +131,32 @@ function MonthPulse({
 }
 
 function AuraBookWidget() {
-  const front = (
-    <HoloFx
-      fill
-      radius="l"
-      border="brand-alpha-medium"
-      background="surface"
-      shine={{ opacity: 18, blending: "screen" }}
-      burn={{ opacity: 12, blending: "screen" }}
-      texture={{ opacity: 6 }}
-      reducedMotion="auto"
-    >
-      <Column fill gap="24" padding="24" horizontal="between">
-        <Row horizontal="between" vertical="center">
-          <Badge background="brand-alpha-weak" onBackground="brand-strong">
+  return (
+    <BentoPanel fillHeight padding="20" border="brand-alpha-medium">
+      <Column fillWidth gap="16">
+        <Row fillWidth horizontal="between" vertical="center">
+          <Badge background="brand-alpha-weak" onBackground="brand-strong" effect={false}>
             GitAura field notes
           </Badge>
           <Icon name="book" onBackground="brand-medium" />
         </Row>
-        <Column gap="12">
-          <Heading as="h3" variant="heading-strong-l">
+        <Column gap="8">
+          <Heading as="h3" variant="heading-strong-m">
             From GitHub noise to readable engineering signal
           </Heading>
-          <Text variant="body-default-s" onBackground="neutral-weak">
-            The dashboard packages contribution history, repo breadth, and collaboration into a
-            profile story a visitor can scan in seconds.
+          <Text variant="body-default-xs" onBackground="neutral-weak">
+            Public activity becomes a short evidence trail a visitor can scan without opening a
+            dashboard.
           </Text>
         </Column>
-      </Column>
-    </HoloFx>
-  );
-
-  const back = (
-    <Card fill padding="24" radius="l" border="brand-alpha-medium" background="surface">
-      <Column fill gap="20" horizontal="between">
-        <Text variant="label-default-s" onBackground="neutral-weak">
-          Aura chapters
-        </Text>
-        <Column gap="16">
+        <Column gap="12">
           {githubAura.chapters.map((chapter, index) => (
-            <Row key={chapter.title} gap="12" vertical="start">
-              <Badge background="neutral-alpha-weak" onBackground="neutral-strong">
+            <Row key={chapter.title} gap="12" vertical="start" wrap>
+              <Badge background="neutral-alpha-weak" onBackground="neutral-strong" effect={false}>
                 {String(index + 1).padStart(2, "0")}
               </Badge>
-              <Column gap="4">
-                <Text variant="heading-strong-s">{chapter.title}</Text>
+              <Column fillWidth gap="4">
+                <Text variant="heading-strong-xs">{chapter.title}</Text>
                 <Text variant="body-default-xs" onBackground="neutral-weak">
                   {chapter.detail}
                 </Text>
@@ -175,18 +165,7 @@ function AuraBookWidget() {
           ))}
         </Column>
       </Column>
-    </Card>
-  );
-
-  return (
-    <FlipFx
-      minHeight={16}
-      radius="l"
-      front={front}
-      back={back}
-      flipDirection="horizontal"
-      timing={520}
-    />
+    </BentoPanel>
   );
 }
 
@@ -229,7 +208,7 @@ function RepoStrip() {
 
 function MonthlyBreakdownCard({ maxMonth }: { maxMonth: number }) {
   return (
-    <Card fillWidth padding="24" radius="l" border="neutral-alpha-medium" background="surface">
+    <BentoPanel padding="20">
       <Column gap="20">
         <Row
           fillWidth
@@ -256,14 +235,14 @@ function MonthlyBreakdownCard({ maxMonth }: { maxMonth: number }) {
           ))}
         </Grid>
       </Column>
-    </Card>
+    </BentoPanel>
   );
 }
 
 function ConsistencyCard() {
   return (
-    <Card fillWidth padding="20" radius="l" border="neutral-alpha-medium" background="surface">
-      <Row fillWidth gap="16" vertical="center" horizontal="between">
+    <BentoPanel>
+      <Row fillWidth gap="16" vertical="center" horizontal="between" wrap>
         <Column gap="4">
           <Text variant="label-default-s" onBackground="neutral-weak">
             Consistency
@@ -285,7 +264,7 @@ function ConsistencyCard() {
           edgePad={4}
         />
       </Row>
-    </Card>
+    </BentoPanel>
   );
 }
 
@@ -301,7 +280,7 @@ function ScoreEngineCard() {
   ];
 
   return (
-    <Card fillWidth padding="20" radius="l" border="neutral-alpha-medium" background="surface">
+    <BentoPanel>
       <Column gap="16">
         <Column gap="4">
           <Text variant="label-default-s" onBackground="neutral-weak">
@@ -319,7 +298,7 @@ function ScoreEngineCard() {
                 <Text variant="label-strong-s">{value}%</Text>
               </Row>
               <LinearGauge
-                width={220}
+                width={192}
                 height={32}
                 line={{ count: 40, width: 3, length: 34 }}
                 value={value}
@@ -330,13 +309,13 @@ function ScoreEngineCard() {
           ))}
         </Column>
       </Column>
-    </Card>
+    </BentoPanel>
   );
 }
 
 function RecentReposCard() {
   return (
-    <Card fillWidth padding="24" radius="l" border="neutral-alpha-medium" background="surface">
+    <BentoPanel padding="20">
       <Column gap="20">
         <Column gap="4">
           <Text variant="label-default-s" onBackground="neutral-weak">
@@ -348,12 +327,11 @@ function RecentReposCard() {
         </Column>
         <RepoStrip />
       </Column>
-    </Card>
+    </BentoPanel>
   );
 }
 
 export function GitAuraDashboardHero() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
   const maxMonth = Math.max(...githubAura.months.map((month) => month.contributions));
 
   return (
@@ -433,140 +411,109 @@ export function GitAuraDashboardHero() {
                   </Button>
                 }
               >
-                <Card padding="16" radius="m" background="surface" border="neutral-alpha-medium">
+                <Column padding="16" radius="m" background="surface" border="neutral-alpha-medium">
                   <Text variant="body-default-xs" onBackground="neutral-weak">
                     Public GitHub profile data only. Private repository details are not surfaced.
                   </Text>
-                </Card>
+                </Column>
               </Animation>
             </Row>
           </Column>
         </Row>
       </RevealFx>
 
-      <MotionColumn
-        fillWidth
-        gap="16"
-        custom={{ delay: 0.05, reduceMotion: shouldReduceMotion }}
-        variants={appear}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.25 }}
-      >
-        <TiltFx reducedMotion="auto" intensity={0.45}>
-          <Card
+      <BentoPanel padding="24" radius="xl" shadow="l">
+        <Column gap="24">
+          <Row
             fillWidth
-            padding="24"
-            radius="xl"
-            border="neutral-alpha-medium"
-            background="surface"
-            shadow="l"
+            horizontal="between"
+            vertical="center"
+            gap="24"
+            s={{ direction: "column", vertical: "start" }}
           >
-            <Column gap="24">
-              <Row
-                fillWidth
-                horizontal="between"
-                vertical="center"
-                gap="24"
-                s={{ direction: "column", vertical: "start" }}
+            <Row gap="16" vertical="center" s={{ direction: "column", vertical: "start" }}>
+              <Column
+                width="56"
+                height="56"
+                radius="l"
+                center
+                border="brand-alpha-medium"
+                background="brand-alpha-weak"
               >
-                <Row gap="16" vertical="center">
-                  <Column
-                    width="56"
-                    height="56"
-                    radius="l"
-                    center
-                    border="brand-alpha-medium"
-                    background="brand-alpha-weak"
-                  >
-                    <Icon name="github" size="l" onBackground="brand-strong" />
-                  </Column>
-                  <Column gap="4">
-                    <Heading as="h3" variant="heading-strong-xl">
-                      {githubAura.profile.name}
-                    </Heading>
-                    <Text variant="body-default-s" onBackground="neutral-weak">
-                      @{githubAura.profile.login} - {githubAura.profile.bio}
-                    </Text>
-                  </Column>
-                </Row>
-                <Column
-                  padding="20"
-                  radius="l"
-                  border="neutral-alpha-medium"
-                  background="page"
-                  minWidth={14}
-                >
-                  <Text variant="label-default-s" onBackground="neutral-weak">
-                    Aura rank
-                  </Text>
-                  <Heading as="p" variant="heading-strong-xl">
-                    {githubAura.aura.label}
-                  </Heading>
-                </Column>
-              </Row>
-
-              <Grid columns="4" gap="16" l={{ columns: "2" }} s={{ columns: "1" }}>
-                <MetricTile
-                  label="Total aura"
-                  value={formatCompact(githubAura.aura.score)}
-                  detail={`${formatCompact(githubAura.totals.contributions)} contributions`}
-                  icon="rocket"
-                />
-                <MetricTile
-                  label="Public repos"
-                  value={githubAura.profile.publicRepos.toString()}
-                  detail={`${githubAura.profile.followers} followers, ${githubAura.profile.following} following`}
-                  icon="grid"
-                />
-                <MetricTile
-                  label="Last 30 days"
-                  value={githubAura.totals.last30Days.toLocaleString("en-US")}
-                  detail="Recent contribution output"
-                  icon="calendar"
-                />
-                <MetricTile
-                  label="Peak day"
-                  value={githubAura.totals.peakDay.contributions.toString()}
-                  detail={githubAura.totals.peakDay.date}
-                  icon="arrowUpRight"
-                />
-              </Grid>
+                <Icon name="github" size="l" onBackground="brand-strong" />
+              </Column>
+              <Column gap="4">
+                <Heading as="h3" variant="heading-strong-xl">
+                  {githubAura.profile.name}
+                </Heading>
+                <Text variant="body-default-s" onBackground="neutral-weak">
+                  @{githubAura.profile.login} - {githubAura.profile.bio}
+                </Text>
+              </Column>
+            </Row>
+            <Column
+              padding="16"
+              radius="l"
+              border="neutral-alpha-medium"
+              background="page"
+              minWidth={14}
+              s={{ style: { minWidth: 0 } }}
+            >
+              <Text variant="label-default-s" onBackground="neutral-weak">
+                Aura rank
+              </Text>
+              <Heading as="p" variant="heading-strong-xl">
+                {githubAura.aura.label}
+              </Heading>
             </Column>
-          </Card>
-        </TiltFx>
-      </MotionColumn>
+          </Row>
 
-      <Row fillWidth gap="16" m={{ direction: "column" }} s={{ direction: "column" }}>
-        <MotionColumn
-          fillWidth
-          flex="2"
-          gap="16"
-          custom={{ delay: 0.1, reduceMotion: shouldReduceMotion }}
-          variants={appear}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
+          <Grid columns="4" gap="16" l={{ columns: "2" }} s={{ columns: "1" }}>
+            <MetricTile
+              label="Total aura"
+              value={formatCompact(githubAura.aura.score)}
+              detail={`${formatCompact(githubAura.totals.contributions)} contributions`}
+              icon="rocket"
+            />
+            <MetricTile
+              label="Public repos"
+              value={githubAura.profile.publicRepos.toString()}
+              detail={`${githubAura.profile.followers} followers, ${githubAura.profile.following} following`}
+              icon="grid"
+            />
+            <MetricTile
+              label="Last 30 days"
+              value={githubAura.totals.last30Days.toLocaleString("en-US")}
+              detail="Recent contribution output"
+              icon="calendar"
+            />
+            <MetricTile
+              label="Peak day"
+              value={githubAura.totals.peakDay.contributions.toString()}
+              detail={githubAura.totals.peakDay.date}
+              icon="arrowUpRight"
+            />
+          </Grid>
+        </Column>
+      </BentoPanel>
+
+      <Row fillWidth gap="16" vertical="stretch" s={{ direction: "column" }}>
+        <Column fillWidth flex="2" gap="16" minWidth={0}>
           <MonthlyBreakdownCard maxMonth={maxMonth} />
-        </MotionColumn>
+        </Column>
 
-        <MotionColumn
-          fillWidth
-          flex="1"
-          gap="16"
-          custom={{ delay: 0.16, reduceMotion: shouldReduceMotion }}
-          variants={appear}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-        >
+        <Column fillWidth fillHeight flex="1" gap="16" minWidth={18}>
           <AuraBookWidget />
-          <ConsistencyCard />
-          <ScoreEngineCard />
-          <RecentReposCard />
-        </MotionColumn>
+        </Column>
       </Row>
+
+      <Grid columns="3" gap="16" l={{ columns: "2" }} s={{ columns: "1" }}>
+        <ConsistencyCard />
+        <ScoreEngineCard />
+        <Column fillWidth l={{ style: { gridColumn: "1 / -1" } }}>
+          <RecentReposCard />
+        </Column>
+      </Grid>
     </Column>
   );
 }

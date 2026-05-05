@@ -9,7 +9,12 @@ import {
   SmartLink,
   Text,
 } from "@once-ui-system/core";
-import { GitAuraProjectPreview } from "@/components/gitaura";
+import { ProjectDashboardPreview } from "@/components/project-dashboard";
+import { getProjectEvidence, type ProjectVisual, projectVisuals } from "@/resources";
+
+const projectVisualBySlug = new Map<string, ProjectVisual>(
+  projectVisuals.map((project) => [project.slug, project]),
+);
 
 interface ProjectCardProps {
   href: string;
@@ -31,12 +36,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   avatars,
   link,
+  priority,
   slug,
 }) => {
+  const projectVisual = slug ? projectVisualBySlug.get(slug) : undefined;
+  const projectEvidence = projectVisual ? getProjectEvidence(projectVisual.slug) : undefined;
+
   return (
     <Column fillWidth gap="m">
-      {slug === "gitaura" ? (
-        <GitAuraProjectPreview />
+      {projectVisual && projectEvidence ? (
+        <ProjectDashboardPreview
+          cover={images[0]}
+          evidence={projectEvidence}
+          priority={priority}
+          project={projectVisual}
+          summary={description}
+          title={title}
+        />
       ) : (
         <Carousel
           sizes="(max-width: 960px) 100vw, 960px"

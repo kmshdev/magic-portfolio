@@ -6,6 +6,7 @@ export { Mailchimp } from "@/components/Mailchimp";
 export { CustomMDX } from "@/components/mdx";
 export { ProjectCard } from "@/components/ProjectCard";
 export { Providers } from "@/components/Providers";
+export { ProjectDashboardPreview } from "@/components/project-dashboard";
 export { RouteGuard } from "@/components/RouteGuard";
 export { ScrollToHash } from "@/components/ScrollToHash";
 export { ThemeToggle } from "@/components/ThemeToggle";
