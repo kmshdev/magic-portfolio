@@ -93,12 +93,29 @@ export interface Home extends BasePageConfig {
   image: `/images/${string}` | string;
   /** The headline of the home page */
   headline: React.ReactNode;
+  /** Primary recruiter actions shown in the hero */
+  actions: Array<{
+    label: string;
+    href: string;
+    variant: "primary" | "secondary";
+    prefixIcon?: IconName;
+    suffixIcon?: IconName;
+  }>;
   /** Featured badge, which appears above the headline */
   featured: {
     display: boolean;
     title: React.ReactNode;
     href: string;
   };
+  /** Short, sourced proof points shown near the hero */
+  proofStats: Array<{
+    value: string;
+    label: string;
+    detail: string;
+    href?: string;
+  }>;
+  /** Recruiter-first project order for home/work listings */
+  featuredProjectSlugs: string[];
   /** The sub text which appears below the headline */
   subline: React.ReactNode;
 }

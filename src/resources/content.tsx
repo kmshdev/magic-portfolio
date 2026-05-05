@@ -5,7 +5,7 @@ const person: Person = {
   firstName: "Keshav",
   lastName: "Mishra",
   name: "Keshav Mishra",
-  role: "LLM and ML Engineer",
+  role: "Agent Platform Engineer",
   avatar: "/images/avatar.jpg",
   email: "me@kmsh.dev",
   location: "Asia/Kolkata",
@@ -22,7 +22,7 @@ const social: Social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/keshav1998",
+    link: "https://github.com/kmshdev",
     essential: true,
   },
   {
@@ -44,13 +44,29 @@ const home: Home = {
   image: "/images/og/home.jpg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building autonomous agents and LLM-powered systems</>,
+  description: `Portfolio website showcasing my work as an ${person.role}`,
+  headline: <>Agent platforms, codegen tools, and production LLM systems</>,
+  actions: [
+    {
+      label: "View selected work",
+      href: "#selected-work",
+      variant: "primary",
+      suffixIcon: "arrowRight",
+    },
+    {
+      label: "Email me",
+      href: `mailto:${person.email}`,
+      variant: "secondary",
+      prefixIcon: "email",
+    },
+  ],
   featured: {
     display: true,
     title: (
-      <Row gap="12" vertical="center">
-        <strong className="ml-4">Genie Platform</strong>{" "}
+      <Row gap="12" vertical="center" paddingX="4">
+        <Text as="span" variant="label-strong-s">
+          Genie Platform
+        </Text>
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
           Featured work
@@ -59,22 +75,61 @@ const home: Home = {
     ),
     href: "/work/genie-code-generation",
   },
+  proofStats: [
+    {
+      value: "weeks -> minutes",
+      label: "agent prototypes",
+      detail: "Genie turns natural-language briefs into deployable agent/service scaffolds.",
+      href: "/work/genie-code-generation",
+    },
+    {
+      value: "119 -> 1,900",
+      label: "active users",
+      detail: "Valory prediction-market agent adoption scaled through AI tooling.",
+      href: "/work/ai-prediction-market-trader",
+    },
+    {
+      value: "500+ hrs/mo",
+      label: "saved for teams",
+      detail: "MLOps and internal AI systems reduced recurring manual operations work.",
+      href: "/work/automl-platform",
+    },
+    {
+      value: "96.5%",
+      label: "failure accuracy",
+      detail: "Industrial ML system for turbomachinery failure prediction.",
+      href: "/work/turbomachinery-failure-prediction",
+    },
+  ],
+  featuredProjectSlugs: [
+    "genie-code-generation",
+    "genie-cli",
+    "agents-fun-eliza",
+    "ai-prediction-market-trader",
+    "plugin-memeooorr",
+    "rag-chatbot-oil-gas",
+    "text2sql-agent",
+    "automl-platform",
+    "text2sql2plot",
+    "turbomachinery-failure-prediction",
+    "gitaura",
+  ],
   subline: (
     <>
-      I'm Keshav, an LLM and ML Engineer specializing in{" "}
+      I'm Keshav, an engineer for{" "}
       <Text as="span" size="xl" weight="strong">
-        autonomous agents
+        agent platforms
       </Text>
       ,{" "}
       <Text as="span" size="xl" weight="strong">
-        prompt engineering
+        LLM code generation
       </Text>
       , and{" "}
       <Text as="span" size="xl" weight="strong">
-        open-source AI tooling
+        production retrieval systems
       </Text>
-      . <br />I architect production-grade LLM applications that transform complex workflows into
-      intelligent automation.
+      . <br />I turn ambiguous operational workflows into reliable AI surfaces with evaluation,
+      orchestration, and deployment discipline.
     </>
   ),
 };
@@ -97,14 +152,13 @@ const about: About = {
   },
   intro: {
     display: true,
-    title: "Introduction",
+    title: "What I'm strongest at",
     description: (
       <>
-        Innovative LLM and ML Engineer with 5+ years of experience across retail, finance, oil &
-        gas, and health/insurance NLP. Specialized in building autonomous agents, large language
-        model applications, and open-source AI tooling. Seeking full-time roles focused on
-        generative AI, LLM product engineering, and next-generation NLP systems in dynamic,
-        impact-driven teams.
+        I build production LLM systems, internal copilots, and agentic workflows for enterprise and
+        industrial teams. My strongest work sits where model serving, agent tooling, observability,
+        and reliability meet: codegen and migration agents, protected tool access, RAG/Text2SQL, and
+        Kubernetes/Cloudflare-backed delivery.
       </>
     ),
   },
@@ -113,26 +167,81 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
+        company: "Tractable AI",
+        timeframe: "Sep 2025 - Mar 2026",
+        role: "Machine Learning Engineer",
+        achievements: [
+          {
+            id: "tractable-inference-costs",
+            content: (
+              <>
+                Led model-inference migration work that reduced AWS spend by $127K per month and cut
+                inference-layer costs by 60%.
+              </>
+            ),
+          },
+          {
+            id: "tractable-tensorflow-triton-agents",
+            content: (
+              <>
+                Built automated coding-agent workflows that analyzed and migrated 55 legacy
+                TensorFlow computer-vision models for Triton deployment while preserving
+                classification parity within 5e-5.
+              </>
+            ),
+          },
+          {
+            id: "tractable-github-actions-migration",
+            content: (
+              <>
+                Developed reusable migration agents that converted Harness-based CI/CD pipelines to
+                GitHub Actions, saving $37K per month in infrastructure and workflow overhead.
+              </>
+            ),
+          },
+          {
+            id: "tractable-cloudflare-model-serving",
+            content: (
+              <>
+                Defined the migration framework for a Rust and Cloudflare Workers model-serving
+                backend, including service boundaries, phased rollout, and production reliability
+                constraints.
+              </>
+            ),
+          },
+          {
+            id: "tractable-enterprise-modernization",
+            content: (
+              <>
+                Created prompt-driven migration frameworks across Python, TypeScript, and Rust while
+                partnering with enterprise ML systems teams to modernize deployment, release, and
+                support workflows.
+              </>
+            ),
+          },
+        ],
+        images: [],
+      },
+      {
         company: "Valory",
-        timeframe: "April 2024 - July 2025",
+        timeframe: "Apr 2024 - Aug 2025",
         role: "Lead LLM Engineer, Autonomous Agent Platforms",
         achievements: [
           {
             id: "valory-genie-platform",
             content: (
               <>
-                Conceived, architected, and implemented <strong>Genie</strong>, Valory's flagship
-                LLM-driven code generation and agent scaffolding platform—an industry-first system
-                enabling autonomous agent and service creation from natural language.
+                Led <strong>Genie</strong>, an LLM-driven platform that reduced the time to build
+                production-ready Open Autonomy agents from 6 months to 2 weeks.
               </>
             ),
           },
           {
-            id: "valory-prototyping-collapsed",
+            id: "valory-trader-adoption",
             content: (
               <>
-                Directly reduced agent/service prototyping time from weeks to minutes, democratizing
-                autonomous agent development for both technical and non-technical users.
+                Built internal and ecosystem-facing AI tooling that helped scale active users of the
+                Trader agent service from 119 to 1,900.
               </>
             ),
           },
@@ -140,39 +249,44 @@ const about: About = {
             id: "valory-agents-fun-eliza",
             content: (
               <>
-                Architected and developed <strong>agents-fun-eliza</strong>, an autonomous agent for
-                the Agents.fun ecosystem, leveraging the Eliza framework to deliver fully
-                open-sourced, interactive, and extensible conversational agents.
+                Shipped <strong>agents-fun-eliza</strong>, contributing to growth from 0 to 170
+                active users in 2 weeks.
               </>
             ),
           },
           {
-            id: "valory-plugin-memeooorr",
+            id: "valory-bedrock-inference",
             content: (
               <>
-                Published and maintained <strong>plugin-memeooorr</strong>—a TypeScript-based
-                open-source package, released on npm, enabling meme-centric agent extensions and
-                community creativity.
+                Built Python and FastAPI services for LLM inference and agent orchestration,
+                including AWS Bedrock integrations and production tool-calling flows.
               </>
             ),
           },
           {
-            id: "valory-prompt-pipelines",
+            id: "valory-routing-evaluation-pipelines",
             content: (
               <>
-                Engineered robust LLM prompt engineering pipelines, enabling semantic-to-formal
-                translation for agent behaviors and FSMs, with feedback loops and error handling for
-                high-reliability code generation.
+                Designed routing, evaluation, and tool-calling pipelines for production agents with
+                safety checks, secure defaults, and continuous response-quality improvements.
               </>
             ),
           },
           {
-            id: "valory-agent-mlops",
+            id: "valory-protected-tool-access",
             content: (
               <>
-                Enhanced agent orchestration and deployment pipelines using containerization
-                (Docker/Kubernetes), CI/CD, MLflow, and best MLOps practices—delivering
-                reproducible, secure, and scalable agent workflows.
+                Implemented authorization-aware agent behavior and protected-tool access patterns
+                for sensitive enterprise workflows.
+              </>
+            ),
+          },
+          {
+            id: "valory-deployment-flows",
+            content: (
+              <>
+                Shipped Docker, Kubernetes, and MLflow-backed deployment flows while partnering
+                across engineering, research, product, and business teams.
               </>
             ),
           },
@@ -185,76 +299,56 @@ const about: About = {
         role: "LLM and MLOps Engineer",
         achievements: [
           {
-            id: "mech-rag-field-agent",
-            content: (
-              <>
-                Developed a <strong>RAG Agent</strong> for on-field agents to access and retrieve
-                maintenance logs, servicing records, and critical equipment data on-demand.
-              </>
-            ),
-          },
-          {
             id: "mech-text2sql2plot",
             content: (
               <>
-                Developed a <strong>Text2SQL2Plot LLM agent</strong> for field workers in
-                turbomachinery plants using Vanna.ai and GPT-4o-mini, reducing repair time by 20%.
+                Built a <strong>Text2SQL2Plot LLM agent</strong> in Python for plant operators to
+                query operational data and generate visualizations, reducing repair time by 20%.
               </>
             ),
           },
           {
-            id: "mech-automl-pipeline",
+            id: "mech-internal-ai-mlops-savings",
             content: (
               <>
-                Fabricated end-to-end <strong>AutoML</strong> that auto tracks, hypertunes, deploys
-                models saving 100+ hrs monthly work.
+                Built internal AI and MLOps systems that saved the ML team 500+ hours per month and
+                helped scale delivery from 3 clients to 10 in one year.
               </>
             ),
           },
           {
-            id: "mech-role-assistant",
+            id: "mech-dagster-migration",
             content: (
               <>
-                Built a <strong>LLM Role Assistant</strong> tool based on internal alerts data with
-                LangChain & GPT-4 saving 200+ man hours monthly, which performs work equal to 4 team
-                members of alert management team.
+                Migrated ETL pipelines from Airflow to Dagster for horizontally scalable, observable
+                data workflows supporting ML and LLM systems, improving data processing time by 65%.
               </>
             ),
           },
           {
-            id: "mech-oil-gas-chatbot",
+            id: "mech-enterprise-account",
             content: (
               <>
-                Pioneered a <strong>RAG based LLM chatbot</strong> using GPT-4 and LlamaIndex, that
-                allows user to interact with bot that has access to latest developments in Energy,
-                Oil and Gas fields, that is directly client facing for big Oil and Gas Clients.
+                Owned client onboarding, infrastructure, and production deployment for a major
+                account generating $3M in annual revenue.
               </>
             ),
           },
           {
-            id: "mech-mlops-platform",
+            id: "mech-production-ai-services",
             content: (
               <>
-                Built an in-house <strong>MLOps platform</strong> utilizing drift detection, MLflow,
-                automated model training, that reduced modeling related workload by 70%.
+                Managed production AI services with observability-driven monitoring, configuration
+                updates, and Kubernetes-based delivery for enterprise customers.
               </>
             ),
           },
           {
-            id: "mech-mistral-finetune",
+            id: "mech-anomaly-failure-prediction",
             content: (
               <>
-                Trained <strong>Mistral 7B model</strong> using on-premise data of alerts utilizing
-                a distributed framework that can scale to large datasets.
-              </>
-            ),
-          },
-          {
-            id: "mech-failure-prediction",
-            content: (
-              <>
-                Led a team of data scientists in developing a ML model that predicted the failure of
-                turbomachinery with <strong>96.5% accuracy</strong>.
+                Productionized anomaly-detection and failure-prediction services with up to{" "}
+                <strong>96.5% accuracy</strong> for industrial clients.
               </>
             ),
           },
@@ -283,68 +377,69 @@ const about: About = {
     title: "Technical Skills",
     skills: [
       {
-        title: "LLM Engineering",
+        title: "LLM & Agent Systems",
         description: (
           <>
-            Expert in prompt engineering, RAG (Retrieval-Augmented Generation), agent orchestration,
-            and semantic-to-formal translation for autonomous systems.
+            LLM applications, RAG, agentic workflows, internal AI tools, LangChain, PyTorch, and
+            Triton Inference Server.
           </>
         ),
         tags: [
           { name: "LangChain", icon: "" },
-          { name: "DSPy", icon: "" },
-          { name: "LlamaIndex", icon: "" },
-          { name: "Langflow", icon: "" },
-          { name: "HuggingFace", icon: "" },
+          { name: "RAG", icon: "" },
+          { name: "Agentic workflows", icon: "" },
+          { name: "PyTorch", icon: "" },
+          { name: "Triton", icon: "" },
         ],
         images: [],
       },
       {
-        title: "MLOps & Infrastructure",
+        title: "Observability & Delivery",
         description: (
           <>
-            Building production-grade ML systems with CI/CD, drift detection, AutoML, and
-            containerized deployment at scale.
+            Terraform, GitHub Actions, Grafana, OpenTelemetry, CI/CD automation, and configuration
+            management.
           </>
         ),
         tags: [
-          { name: "MLflow", icon: "" },
+          { name: "Terraform", icon: "" },
+          { name: "GitHub Actions", icon: "github" },
+          { name: "Grafana", icon: "" },
+          { name: "OpenTelemetry", icon: "" },
+          { name: "CI/CD", icon: "" },
+        ],
+        images: [],
+      },
+      {
+        title: "Languages & Platforms",
+        description: (
+          <>TypeScript, Python, Rust, SQL, FastAPI, Docker, Kubernetes, and Cloudflare Workers.</>
+        ),
+        tags: [
+          { name: "TypeScript", icon: "typescript" },
+          { name: "Python", icon: "python" },
+          { name: "Rust", icon: "" },
+          { name: "FastAPI", icon: "" },
           { name: "Docker", icon: "" },
           { name: "Kubernetes", icon: "" },
-          { name: "DevOps", icon: "" },
-        ],
-        images: [],
-      },
-      {
-        title: "Programming & Cloud",
-        description: (
-          <>
-            Full-stack AI development in Python, TypeScript, and Rust, with expertise in AWS, SQL,
-            MongoDB, and Redis.
-          </>
-        ),
-        tags: [
-          { name: "Python", icon: "python" },
-          { name: "TypeScript", icon: "typescript" },
-          { name: "Rust", icon: "" },
-          { name: "AWS", icon: "" },
           { name: "SQL", icon: "" },
+          { name: "Cloudflare Workers", icon: "" },
         ],
         images: [],
       },
       {
-        title: "Data Science & ML",
+        title: "Security & Reliability",
         description: (
           <>
-            Advanced expertise in NLP, time series analysis, statistics, and machine learning
-            frameworks like XGBoost and scikit-learn.
+            Authorization-aware tool access, protected-tool patterns, secure defaults, and
+            production monitoring.
           </>
         ),
         tags: [
-          { name: "NLP", icon: "" },
-          { name: "XGBoost", icon: "" },
-          { name: "Statistics", icon: "" },
-          { name: "Time Series", icon: "" },
+          { name: "Authorization-aware tools", icon: "" },
+          { name: "Protected-tool patterns", icon: "" },
+          { name: "Secure defaults", icon: "" },
+          { name: "Production monitoring", icon: "" },
         ],
         images: [],
       },
@@ -355,15 +450,15 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about AI and engineering...",
+  title: "Field notes on production agents and LLM systems",
   description: `Read what ${person.name} has been up to recently`,
 };
 
 const work: Work = {
   path: "/work",
   label: "Work",
-  title: `Projects – ${person.name}`,
-  description: `LLM and ML projects by ${person.name}`,
+  title: `Selected work – ${person.name}`,
+  description: `Agent platforms, LLM codegen, RAG, Text2SQL, and MLOps systems by ${person.name}`,
 };
 
 const gallery: Gallery = {
