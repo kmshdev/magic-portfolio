@@ -5,11 +5,11 @@
   "author": "Keshav Mishra <me@kmsh.dev>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/keshav1998/magic-portfolio.git"
+    "url": "https://github.com/kmshdev/magic-portfolio.git"
   },
   "homepage": "https://kmsh.dev",
   "bugs": {
-    "url": "https://github.com/keshav1998/magic-portfolio/issues"
+    "url": "https://github.com/kmshdev/magic-portfolio/issues"
   },
   "scripts": {
     "dev": "next dev --webpack",
