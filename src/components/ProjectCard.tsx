@@ -10,11 +10,7 @@ import {
   Text,
 } from "@once-ui-system/core";
 import { ProjectDashboardPreview } from "@/components/project-dashboard";
-import { getProjectEvidence, type ProjectVisual, projectVisuals } from "@/resources";
-
-const projectVisualBySlug = new Map<string, ProjectVisual>(
-  projectVisuals.map((project) => [project.slug, project]),
-);
+import { getProjectEvidence, getProjectVisual } from "@/resources";
 
 interface ProjectCardProps {
   href: string;
@@ -39,15 +35,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   priority,
   slug,
 }) => {
-  const projectVisual = slug ? projectVisualBySlug.get(slug) : undefined;
-  const projectEvidence = projectVisual ? getProjectEvidence(projectVisual.slug) : undefined;
+  const projectVisual = slug ? getProjectVisual(slug) : undefined;
 
   return (
     <Column fillWidth gap="m">
-      {projectVisual && projectEvidence ? (
+      {projectVisual ? (
         <ProjectDashboardPreview
           cover={images[0]}
-          evidence={projectEvidence}
+          evidence={getProjectEvidence(projectVisual.slug)}
           priority={priority}
           project={projectVisual}
           summary={description}

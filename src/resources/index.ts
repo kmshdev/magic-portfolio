@@ -32,6 +32,6 @@ export type {
   EvidenceSourceType,
   ProjectEvidence,
 } from "./projectEvidence";
-export { getProjectEvidence, projectEvidence } from "./projectEvidence";
-export type { ProjectVisual } from "./projectVisuals";
-export { projectVisuals } from "./projectVisuals";
+export { getProjectEvidence } from "./projectEvidence";
+export type { ProjectSlug, ProjectVisual } from "./projectVisuals";
+export { getProjectVisual, projectVisuals } from "./projectVisuals";

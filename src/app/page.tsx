@@ -3,7 +3,6 @@ import {
   Badge,
   Button,
   Column,
-  Grid,
   Heading,
   Meta,
   RevealFx,
@@ -131,11 +130,7 @@ export default function Home() {
               View all posts
             </Button>
           </Row>
-          <Grid columns="1" fillWidth>
-            <Column fillWidth>
-              <Posts range={[1, 2]} columns="2" marginBottom="0" thumbnail direction="column" />
-            </Column>
-          </Grid>
+          <Posts range={[1, 2]} columns="2" marginBottom="0" thumbnail direction="column" />
         </Column>
       )}
       <Projects range={[2]} />

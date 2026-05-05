@@ -1,6 +1,4 @@
-import type { ProjectVisual } from "./projectVisuals";
-
-type ProjectSlug = ProjectVisual["slug"];
+import type { ProjectSlug } from "./projectVisuals";
 
 export type EvidenceSourceType = "github" | "resume" | "case-study" | "package" | "demo";
 
@@ -41,7 +39,7 @@ const githubSnapshot = "GitHub snapshot: May 5, 2026";
 const resumeSnapshot = "Resume source: KMSH.pdf";
 const caseStudySnapshot = "Portfolio case study";
 
-export const projectEvidence = [
+const projectEvidence = [
   {
     slug: "agents-fun-eliza",
     snapshotLabel: githubSnapshot,
@@ -675,6 +673,10 @@ export const projectEvidence = [
   },
 ] as const satisfies readonly ProjectEvidence[];
 
+const projectEvidenceBySlug = new Map<ProjectSlug, ProjectEvidence>(
+  projectEvidence.map((project) => [project.slug, project]),
+);
+
 const fallbackEvidence = {
   snapshotLabel: caseStudySnapshot,
   confidence: {
@@ -707,7 +709,7 @@ const fallbackEvidence = {
 } as const;
 
 export function getProjectEvidence(slug: ProjectSlug): ProjectEvidence {
-  const evidence = projectEvidence.find((project) => project.slug === slug);
+  const evidence = projectEvidenceBySlug.get(slug);
 
   if (evidence) {
     return evidence;
